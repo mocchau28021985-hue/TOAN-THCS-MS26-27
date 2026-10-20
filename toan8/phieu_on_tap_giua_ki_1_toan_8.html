@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHIẾU ÔN TẬP TƯƠNG TÁC GIỮA KÌ I - MÔN TOÁN 8</title>
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+    
+        :root {
+            --primary: #D97706;
+            --primary-light: #EEF2FF;
+            --success: #10B981;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+            --bg-page: #F8FAFC;
+            --bg-card: #FFFFFF;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid #E2E8F0;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary), #1E3A8A);
+            color: white;
+            padding: 30px 25px;
+            text-align: center;
+        }
+        header h1 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+        header p { font-size: 14.5px; opacity: 0.95; font-weight: 500; }
+        
+        /* Student Info Bar */
+        .student-bar {
+            background: #F1F5F9;
+            padding: 14px 25px;
+            border-bottom: 1px solid #E2E8F0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .student-inputs {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .input-group-student {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .input-group-student label {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #334155;
+        }
+        .input-group-student input {
+            padding: 8px 12px;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            background: white;
+            transition: border 0.2s;
+        }
+        .input-group-student input:focus { border-color: var(--primary); }
+        
+        .student-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-gsheet-config {
+            background: white;
+            color: #0F766E;
+            border: 1.5px solid #99F6E4;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-gsheet-config:hover { background: #F0FDFA; }
+        
+        .btn-submit-gsheet {
+            background: linear-gradient(135deg, #059669, #10B981);
+            color: white;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 13.5px;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.25);
+            transition: all 0.2s;
+        }
+        .btn-submit-gsheet:hover { opacity: 0.95; transform: translateY(-1px); }
+
+        /* Score Bar */
+        .score-bar {
+            background: white;
+            padding: 14px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #E2E8F0;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .score-item { font-size: 15px; font-weight: 700; color: #1E293B; }
+        .score-badge {
+            background: #EFF6FF;
+            color: var(--primary);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 16px;
+            border: 1px solid #BFDBFE;
+        }
+        .score-bar-actions { display: flex; gap: 8px; }
+        .btn-top {
+            background: #F8FAFC;
+            color: #334155;
+            border: 1px solid #CBD5E1;
+            padding: 7px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-top:hover { background: #E2E8F0; }
+
+        .tabs-nav {
+            display: flex;
+            overflow-x: auto;
+            background: #F8FAFC;
+            border-bottom: 2px solid #E2E8F0;
+            padding: 10px 15px 0 15px;
+            gap: 8px;
+        }
+        .tab-btn {
+            padding: 12px 18px;
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { color: var(--primary); }
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background: white;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.02);
+        }
+
+        .main-content { padding: 28px 24px; }
+        
+        /* Action Toolbar */
+        .genre-toolbar {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 14px;
+            padding: 12px 16px;
+            margin-bottom: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .toolbar-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .toolbar-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .tool-btn {
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn-shuffle {
+            background: #EDE9FE;
+            color: #6D28D9;
+            border: 1px solid #DDD6FE;
+        }
+        .btn-shuffle:hover { background: #DDD6FE; }
+        .btn-remix {
+            background: #FEF3C7;
+            color: #B45309;
+            border: 1px solid #FDE68A;
+        }
+        .btn-remix:hover { background: #FDE68A; }
+        .btn-reset-genre {
+            background: #F1F5F9;
+            color: #475569;
+            border: 1px solid #CBD5E1;
+        }
+        .btn-reset-genre:hover { background: #E2E8F0; }
+
+        .genre-header-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+        .genre-header-box h2 {
+            font-size: 20px;
+            color: var(--primary);
+            border-left: 5px solid var(--primary);
+            padding-left: 12px;
+            font-weight: 800;
+        }
+        .genre-count { font-size: 14px; font-weight: 600; color: #64748B; }
+
+        .theory-box {
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            border-left: 5px solid #3B82F6;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+        }
+        .theory-box .box-title {
+            font-weight: 800;
+            color: #1E40AF;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        .theory-box ul { padding-left: 20px; font-size: 14px; }
+        .theory-box li { margin-bottom: 6px; }
+
+        .example-box {
+            background: #FFFBEB;
+            border: 1px solid #FDE68A;
+            border-left: 5px solid #F59E0B;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 25px;
+        }
+        .example-box .box-title {
+            font-weight: 800;
+            color: #92400E;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        .ex-prob { font-size: 14.5px; margin-bottom: 10px; color: #1F2937; }
+        .ex-sol {
+            font-size: 14px;
+            background: white;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px dashed #FCD34D;
+            line-height: 1.7;
+        }
+
+        .practice-heading h3 {
+            font-size: 17px;
+            color: #991B1B;
+            margin-bottom: 16px;
+            font-weight: 800;
+        }
+
+        .q-card {
+            background: white;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 14px;
+            padding: 20px 22px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            transition: all 0.25s ease;
+        }
+        .q-card:hover { border-color: #94A3B8; box-shadow: 0 6px 12px rgba(0,0,0,0.06); }
+        .q-card.correct { border-color: var(--success); background: #F0FDF4; }
+        .q-card.wrong { border-color: var(--danger); background: #FEF2F2; }
+        
+        .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        .q-index {
+            background: #0F172A;
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+        .badge {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .badge-mcq { background: #E0E7FF; color: #3730A3; }
+        .badge-tf { background: #FCE7F3; color: #9D174D; }
+        .badge-short { background: #DCFCE7; color: #166534; }
+
+        .q-prompt { font-size: 15.5px; font-weight: 600; color: #0F172A; margin-bottom: 15px; }
+
+        /* MCQ */
+        .mcq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 10px;
+        }
+        .opt-btn {
+            background: #F8FAFC;
+            border: 1.5px solid #CBD5E1;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 14.5px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .opt-btn:hover:not(:disabled) { background: #EFF6FF; border-color: #3B82F6; }
+        .opt-btn.chosen-correct { background: #DCFCE7 !important; border-color: #10B981 !important; color: #065F46 !important; font-weight: 700; }
+        .opt-btn.chosen-wrong { background: #FEE2E2 !important; border-color: #EF4444 !important; color: #991B1B !important; }
+        .opt-btn.is-answer { background: #DCFCE7 !important; border-color: #10B981 !important; font-weight: 700; }
+
+        /* TF */
+        .tf-wrap { display: flex; gap: 12px; }
+        .btn-tf {
+            padding: 10px 24px;
+            border-radius: 10px;
+            font-size: 14.5px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn-dung { background: #EFF6FF; color: #1E40AF; border-color: #BFDBFE; }
+        .btn-dung:hover:not(:disabled) { background: #DBEAFE; }
+        .btn-sai { background: #FFF1F2; color: #9F1239; border-color: #FECDD3; }
+        .btn-sai:hover:not(:disabled) { background: #FFE4E6; }
+        .btn-tf.chosen-correct { background: #10B981 !important; color: white !important; }
+        .btn-tf.chosen-wrong { background: #EF4444 !important; color: white !important; }
+
+        /* Short */
+        .short-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .short-wrap label { font-size: 14.5px; font-weight: 600; color: #475569; }
+        .short-wrap input {
+            padding: 10px 14px;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 10px;
+            font-size: 15px;
+            width: 140px;
+            outline: none;
+            transition: border 0.2s;
+            font-family: inherit;
+        }
+        .short-wrap input:focus { border-color: var(--primary); }
+        .unit { font-size: 14px; font-weight: 700; color: #475569; }
+        .btn-check {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.2s;
+        }
+        .btn-check:hover { opacity: 0.9; }
+
+        /* Results & Explanation */
+        .result-msg {
+            margin-top: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            display: none;
+        }
+        .result-msg.show-correct { display: block; color: var(--success); }
+        .result-msg.show-wrong { display: block; color: var(--danger); }
+
+        .exp-box {
+            margin-top: 10px;
+            font-size: 13.5px;
+            background: #F8FAFC;
+            border-left: 4px solid #64748B;
+            padding: 10px 14px;
+            border-radius: 6px;
+            display: none;
+            color: #1E293B;
+            line-height: 1.6;
+        }
+        .exp-box.show { display: block; }
+
+        /* Modal Popup */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+        .modal-box {
+            background: white;
+            border-radius: 18px;
+            max-width: 520px;
+            width: 100%;
+            padding: 28px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes modalPop {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .modal-box h3 { font-size: 18px; font-weight: 800; margin-bottom: 12px; color: #0F172A; display: flex; align-items: center; gap: 8px; }
+        .modal-box p { font-size: 13.5px; color: #475569; margin-bottom: 16px; line-height: 1.6; }
+        .modal-input {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 10px;
+            font-size: 13.5px;
+            margin-bottom: 16px;
+            outline: none;
+            font-family: inherit;
+        }
+        .modal-input:focus { border-color: var(--primary); }
+        .modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
+        .btn-modal-cancel {
+            background: #F1F5F9;
+            color: #475569;
+            border: 1px solid #CBD5E1;
+            padding: 9px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13.5px;
+            cursor: pointer;
+        }
+        .btn-modal-save {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13.5px;
+            cursor: pointer;
+        }
+
+        /* Toast */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #0F172A;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            font-size: 14px;
+            font-weight: 600;
+            display: none;
+            z-index: 9999;
+            align-items: center;
+            gap: 10px;
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Teacher & Student Mode Bar */
+        .mode-topbar {
+            background: #0F172A;
+            color: white;
+            padding: 10px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 13px;
+            border-bottom: 2px solid #334155;
+        }
+        .mode-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .badge-mode {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .badge-teacher {
+            background: #2563EB;
+            color: white;
+        }
+        .badge-student {
+            background: #059669;
+            color: white;
+        }
+        .badge-exam-code {
+            background: #1E293B;
+            border: 1px solid #475569;
+            color: #F8FAFC;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 12.5px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .badge-exam-code b {
+            color: #FBBF24;
+            font-family: monospace;
+        }
+        .mode-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .btn-mode-act {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .btn-m-shuffle { background: #3B82F6; color: white; }
+        .btn-m-shuffle:hover { background: #2563EB; }
+        .btn-m-remix { background: #F59E0B; color: white; }
+        .btn-m-remix:hover { background: #D97706; }
+        .btn-m-assign { background: #10B981; color: white; font-weight: 800; }
+        .btn-m-assign:hover { background: #059669; }
+        .btn-m-toggle { background: #475569; color: white; }
+        .btn-m-toggle:hover { background: #334155; }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 13.5px;
+            color: var(--text-muted);
+            border-top: 1px solid #E2E8F0;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; border: none; }
+            .student-bar, .score-bar, .tabs-nav, .btn-check, footer, .genre-toolbar, #toast, .modal-overlay { display: none !important; }
+            .genre-section { display: block !important; margin-bottom: 30px; page-break-after: always; }
+            .exp-box { display: block !important; }
+        }
+    
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- MODE TOPBAR (BÀN LÀM VIỆC GIÁO VIÊN / GIAO DIỆN HỌC SINH) -->
+    <div class="mode-topbar" id="modeTopBar"></div>
+
+    <header>
+        <h1>PHIẾU ÔN TẬP TƯƠNG TÁC GIỮA KÌ I - MÔN TOÁN 8</h1>
+        <p>CHUYÊN ĐỀ BỒI DƯỠNG NẮM CHẮC KIẾN THỨC CỐT LÕI (MỖI DẠNG 10 CÂU ĐA DẠNG HÌNH THỨC)</p>
+    </header>
+
+    <!-- Student Info Bar & Google Sheets Integration -->
+    <div class="student-bar">
+        <div class="student-inputs">
+            <div class="input-group-student">
+                <label><i class="fas fa-user-graduate" style="color: var(--primary);"></i> Họ và tên:</label>
+                <input type="text" id="studentName" placeholder="Nhập họ và tên..." />
+            </div>
+            <div class="input-group-student">
+                <label><i class="fas fa-school" style="color: var(--primary);"></i> Lớp:</label>
+                <input type="text" id="studentClass" placeholder="Ví dụ: 8A1" style="width: 110px;" />
+            </div>
+        </div>
+        <div class="student-actions">
+            <button class="btn-gsheet-config" id="btnGsheetConfig" onclick="openSheetConfigModal()"><i class="fas fa-cog"></i> Cài đặt Google Sheet</button>
+            <button class="btn-submit-gsheet" onclick="submitToGoogleSheet()"><i class="fas fa-cloud-upload-alt"></i> NỘP BÀI VỀ GOOGLE SHEETS</button>
+        </div>
+    </div>
+
+    <!-- Score Bar -->
+    <div class="score-bar">
+        <div class="score-item">
+            Đã làm đúng: <span class="score-badge" id="scoreBadge">0 / 70</span>
+        </div>
+        <div class="score-bar-actions">
+            <button class="btn-top" onclick="resetAll()"><i class="fas fa-rotate-left"></i> Làm lại từ đầu</button>
+            <button class="btn-top" onclick="window.print()"><i class="fas fa-print"></i> In phiếu bài tập</button>
+        </div>
+    </div>
+
+    <!-- Tabs Nav -->
+    <div class="tabs-nav">
+        <button class="tab-btn active" data-id="g1" onclick="switchTab('g1')">Dạng 1: Đơn thức nhiều biến</button>
+<button class="tab-btn " data-id="g2" onclick="switchTab('g2')">Dạng 2: Đa thức nhiều biến</button>
+<button class="tab-btn " data-id="g3" onclick="switchTab('g3')">Dạng 3: Nhân đa thức</button>
+<button class="tab-btn " data-id="g4" onclick="switchTab('g4')">Dạng 4: Chia đa thức cho đơn thức</button>
+<button class="tab-btn " data-id="g5" onclick="switchTab('g5')">Dạng 5: Ba hằng đẳng thức đáng nhớ</button>
+<button class="tab-btn " data-id="g6" onclick="switchTab('g6')">Dạng 6: Tứ giác & Tổng bốn góc</button>
+<button class="tab-btn " data-id="g7" onclick="switchTab('g7')">Dạng 7: Hình thang cân & Bình hành</button>
+
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="main-content" id="genreContainer">
+        <!-- Render động bằng JavaScript -->
+    </div>
+
+    <footer>
+        Bản quyền chuyên môn Tổ Toán - Tin THCS • Chương trình Giáo dục Phổ thông 2018 (Hỗ trợ Trộn đề, Đổi số & Tự động lưu Google Sheets)
+    </footer>
+</div>
+
+<script>
+const rawGenresData = [{"id": "g1", "name": "Dạng 1: Đơn thức nhiều biến", "theory": ["Đơn thức thu gọn: Tích của một số với các biến (mỗi biến có mặt đúng 1 lần với số mũ nguyên dương).", "Thu gọn: Nhân hệ số với hệ số, cộng các số mũ của cùng một biến ($x^m \\cdot x^n = x^{m+n}$).", "Bậc của đơn thức: Tổng số mũ của TẤT CẢ các biến có trong đơn thức đó. (Biến $x$ có số mũ là 1!).", "Đơn thức đồng dạng: Hệ số khác 0 và CÙNG PHẦN BIẾN."], "example": {"title": "Thu gọn đơn thức và tìm bậc", "prob": "Thu gọn $A = 3x^2y \\cdot (-2xy^3)$ và xác định bậc.", "sol": "$A = -6x^3y^4$. Phần hệ số là $-6$, phần biến là $x^3y^4$, bậc là $3 + 4 = 7$."}, "questions": [{"id": "8_1_1", "type": "mcq", "q": "Biểu thức nào sau đây là đơn thức nhiều biến?", "options": ["$2x + 3y$", "$4x^2y$", "$\\frac{x}{y}$", "$x^2 - 1$"], "ans": 1, "exp": "$4x^2y$ là tích giữa số và các biến nên là đơn thức. $2x + 3y$ là đa thức, $\\frac{x}{y}$ có biến ở mẫu."}, {"id": "8_1_2", "type": "mcq", "q": "Bậc của đơn thức $5x^3y^2$ là:", "options": ["3", "2", "5", "6"], "ans": 2, "exp": "Bậc là tổng các số mũ: $3 + 2 = 5$."}, {"id": "8_1_3", "type": "mcq", "q": "Đơn thức nào sau đây đồng dạng với đơn thức $-3x^2y$?", "options": ["$5xy^2$", "$2x^2y$", "$-3xy$", "$4x^3y$"], "ans": 1, "exp": "Đơn thức đồng dạng phải có cùng phần biến $x^2y$, đó là $2x^2y$."}, {"id": "8_1_4", "type": "mcq", "q": "Thu gọn đơn thức $A = 2x^2 \\cdot (-3xy)$ được kết quả là:", "options": ["$-6x^2y$", "$-6x^3y$", "$6x^3y$", "$-x^3y$"], "ans": 1, "exp": "Nhân hệ số: $2 \\cdot (-3) = -6$; Biến: $x^2 \\cdot x = x^3; y \\Rightarrow -6x^3y$."}, {"id": "8_1_5", "type": "tf", "q": "Đơn thức $2xy$ có bậc là 1.", "ans": "sai", "exp": "Sai. $x$ có số mũ 1, $y$ có số mũ 1, tổng số mũ là $1 + 1 = 2$ nên bậc là 2."}, {"id": "8_1_6", "type": "tf", "q": "Số thực khác 0 (ví dụ số 5) là đơn thức có bậc 0.", "ans": "dung", "exp": "Đúng. Số thực khác 0 là đơn thức bậc 0."}, {"id": "8_1_7", "type": "short", "q": "Bậc của đơn thức $3x^4y^2z$ bằng bao nhiêu?", "ans": "7", "unit": "", "exp": "Tổng các số mũ: $4 + 2 + 1 = 7$."}, {"id": "8_1_8", "type": "short", "q": "Thu gọn đơn thức $M = 4x^3 \\cdot 2xy^2$. Hệ số của đơn thức thu gọn bằng bao nhiêu?", "ans": "8", "unit": "", "exp": "Hệ số là: $4 \\cdot 2 = 8$."}, {"id": "8_1_9", "type": "short", "q": "Tính tổng của hai đơn thức đồng dạng: $5x^2y^3 + 3x^2y^3$. Hệ số của kết quả là:", "ans": "8", "unit": "", "exp": "$(5 + 3)x^2y^3 = 8x^2y^3$ nên hệ số là 8."}, {"id": "8_1_10", "type": "short", "q": "Tính hiệu: $7xy^2 - 10xy^2$. Hệ số của kết quả là (chú ý dấu):", "ans": "-3", "unit": "", "exp": "$(7 - 10)xy^2 = -3xy^2$ nên hệ số là -3."}]}, {"id": "g2", "name": "Dạng 2: Đa thức nhiều biến", "theory": ["Đa thức là tổng của những đơn thức.", "Thu gọn đa thức: Gộp các hạng tử đồng dạng với nhau (cộng trừ hệ số, giữ nguyên phần biến).", "Bậc của đa thức: Là bậc của hạng tử có bậc CAO NHẤT trong dạng thu gọn.", "Tính giá trị: Thay giá trị số của biến vào đa thức thu gọn rồi tính."], "example": {"title": "Thu gọn đa thức và tính giá trị", "prob": "Cho đa thức $P = 4x^2y - 3xy + 2x^2y + 3xy - 5$. Thu gọn và tính giá trị tại $x = 1, y = 2$.", "sol": "$P = 6x^2y - 5$. Bậc của $P$ là 3.<br>Tại $x = 1, y = 2 \\Rightarrow P = 6 \\cdot 1^2 \\cdot 2 - 5 = 12 - 5 = 7$."}, "questions": [{"id": "8_2_1", "type": "mcq", "q": "Thu gọn đa thức $A = 5xy - 2x^2 + 3xy + 4x^2$ được kết quả là:", "options": ["$2x^2 + 8xy$", "$6x^2 + 8xy$", "$2x^2 + 2xy$", "$8xy - 6x^2$"], "ans": 0, "exp": "$(-2x^2 + 4x^2) + (5xy + 3xy) = 2x^2 + 8xy$."}, {"id": "8_2_2", "type": "mcq", "q": "Bậc của đa thức $M = 2x^4 - 3x^2y^3 + 5y^4 - 1$ là:", "options": ["4", "5", "6", "9"], "ans": 1, "exp": "Hạng tử $-3x^2y^3$ có bậc là $2 + 3 = 5$ (cao nhất), vậy bậc của đa thức là 5."}, {"id": "8_2_3", "type": "mcq", "q": "Giá trị của đa thức $P = x^2 - 2xy + y^2$ tại $x = 3, y = 1$ là:", "options": ["4", "8", "2", "16"], "ans": 0, "exp": "$3^2 - 2(3)(1) + 1^2 = 9 - 6 + 1 = 4$ (hoặc $(3-1)^2 = 2^2 = 4$)."}, {"id": "8_2_4", "type": "mcq", "q": "Thu gọn đa thức $B = 3x^2y^2 - 5xy + 2 - x^2y^2 + 5xy$ ta được:", "options": ["$2x^2y^2 + 2$", "$4x^2y^2 + 2$", "$2x^2y^2 - 10xy + 2$", "$2x^2y^2$"], "ans": 0, "exp": "$(3x^2y^2 - x^2y^2) + (-5xy + 5xy) + 2 = 2x^2y^2 + 2$."}, {"id": "8_2_5", "type": "tf", "q": "Bậc của đa thức luôn bằng tổng bậc của tất cả các hạng tử trong đa thức đó.", "ans": "sai", "exp": "Sai. Bậc của đa thức là bậc của hạng tử có bậc CAO NHẤT trong dạng thu gọn, không phải lấy tổng."}, {"id": "8_2_6", "type": "tf", "q": "Khi thu gọn đa thức, hai hạng tử đối nhau có tổng bằng 0.", "ans": "dung", "exp": "Đúng. Ví dụ $-3xy + 3xy = 0$."}, {"id": "8_2_7", "type": "short", "q": "Tính giá trị của đa thức $A = 2x^2 - 3xy$ tại $x = 2, y = 1$:", "ans": "2", "unit": "", "exp": "$A = 2(2^2) - 3(2)(1) = 8 - 6 = 2$."}, {"id": "8_2_8", "type": "short", "q": "Tính giá trị của đa thức $B = x^2y - 2xy^2 + 5$ tại $x = -1, y = 2$:", "ans": "15", "unit": "", "exp": "$(-1)^2(2) - 2(-1)(2^2) + 5 = 2 + 8 + 5 = 15$."}, {"id": "8_2_9", "type": "short", "q": "Cho đa thức $C = 4x^2 - 2xy + y^2$. Tính giá trị của $C$ khi $x = 1, y = -2$:", "ans": "12", "unit": "", "exp": "$4(1^2) - 2(1)(-2) + (-2)^2 = 4 + 4 + 4 = 12$."}, {"id": "8_2_10", "type": "short", "q": "Bậc của đa thức $P = x^3 - 2x^2y + 3xy^2 + 2x^2y - 5$ là bao nhiêu?", "ans": "3", "unit": "", "exp": "Thu gọn $P = x^3 + 3xy^2 - 5$. Hạng tử bậc cao nhất có bậc 3."}]}, {"id": "g3", "name": "Dạng 3: Nhân đa thức", "theory": ["Nhân đơn thức với đa thức: $A(B + C) = AB + AC$.", "Nhân đa thức với đa thức: $(A+B)(C+D) = AC + AD + BC + BD$.", "Cảnh báo dấu âm: $(-a) \\cdot (-b) = ab$; $(-a) \\cdot b = -ab$."], "example": {"title": "Nhân đơn thức và đa thức", "prob": "Thực hiện phép tính: a) $2x(3x^2 - 4x + 1)$; b) $(x - 2)(x + 5)$", "sol": "a) $6x^3 - 8x^2 + 2x$.<br>b) $x^2 + 5x - 2x - 10 = x^2 + 3x - 10$."}, "questions": [{"id": "8_3_1", "type": "mcq", "q": "Kết quả của phép nhân $3x(x - 4)$ là:", "options": ["$3x^2 - 12x$", "$3x^2 - 4$", "$3x^2 - 12$", "$3x - 12x$"], "ans": 0, "exp": "$3x \\cdot x - 3x \\cdot 4 = 3x^2 - 12x$."}, {"id": "8_3_2", "type": "mcq", "q": "Thực hiện phép nhân $(x + 1)(x + 3)$ ta được:", "options": ["$x^2 + 4x + 3$", "$x^2 + 3x + 3$", "$x^2 + 4x + 4$", "$x^2 + 3$"], "ans": 0, "exp": "$x^2 + 3x + x + 3 = x^2 + 4x + 3$."}, {"id": "8_3_3", "type": "mcq", "q": "Kết quả của phép nhân $(x - 3)(x + 4)$ là:", "options": ["$x^2 + x - 12$", "$x^2 - x - 12$", "$x^2 + 7x - 12$", "$x^2 - 12$"], "ans": 0, "exp": "$x^2 + 4x - 3x - 12 = x^2 + x - 12$."}, {"id": "8_3_4", "type": "mcq", "q": "Rút gọn biểu thức $M = x(x + 2) - x(x - 3)$ ta được:", "options": ["$5x$", "$-x$", "$2x^2 + 5x$", "$5$"], "ans": 0, "exp": "$x^2 + 2x - x^2 + 3x = 5x$."}, {"id": "8_3_5", "type": "tf", "q": "Ta có: $(-2x) \\cdot (-3y) = -6xy$.", "ans": "sai", "exp": "Sai. Âm nhân âm phải ra dương: $(-2) \\cdot (-3) = +6xy$."}, {"id": "8_3_6", "type": "tf", "q": "Tích của đa thức bậc 1 với đa thức bậc 1 là đa thức bậc 2.", "ans": "dung", "exp": "Đúng. $(ax+b)(cx+d) = acx^2 + ...$ có bậc là 2."}, {"id": "8_3_7", "type": "short", "q": "Khai triển $2x^2 \\cdot (x^2 - 3x + 2)$. Hệ số của $x^3$ là bao nhiêu? (chú ý dấu):", "ans": "-6", "unit": "", "exp": "$2x^2 \\cdot (-3x) = -6x^3$, hệ số là -6."}, {"id": "8_3_8", "type": "short", "q": "Rút gọn biểu thức $N = (x - 1)(x + 2) - x^2$. Khi $x = 5$ thì giá trị là:", "ans": "3", "unit": "", "exp": "$N = x^2 + x - 2 - x^2 = x - 2$. Với $x = 5 \\Rightarrow 5 - 2 = 3$."}, {"id": "8_3_9", "type": "short", "q": "Tính giá trị của $P = x(x - y) + y(x + y)$ tại $x = 2, y = -1$:", "ans": "5", "unit": "", "exp": "$P = x^2 - xy + xy + y^2 = x^2 + y^2 = 2^2 + (-1)^2 = 5$."}, {"id": "8_3_10", "type": "short", "q": "Tìm $x$, biết: $2x(x - 3) - 2x^2 = 12$:", "ans": "-2", "unit": "", "exp": "$2x^2 - 6x - 2x^2 = 12 \\Rightarrow -6x = 12 \\Rightarrow x = -2$."}]}, {"id": "g4", "name": "Dạng 4: Chia đa thức cho đơn thức", "theory": ["Chia hai lũy thừa cùng cơ số: $x^m : x^n = x^{m-n}$ ($m \\ge n$). Nhớ: $x^n : x^n = 1$.", "Chia đa thức cho đơn thức: Chia từng hạng tử của đa thức cho đơn thức rồi cộng các kết quả lại."], "example": {"title": "Chia đa thức cho đơn thức", "prob": "Thực hiện phép tính: $(6x^3y^2 - 9x^2y^3 + 3x^2y) : (3x^2y)$", "sol": "$= (6x^3y^2 : 3x^2y) - (9x^2y^3 : 3x^2y) + (3x^2y : 3x^2y) = 2xy - 3y^2 + 1$."}, "questions": [{"id": "8_4_1", "type": "mcq", "q": "Kết quả của phép chia $12x^3 : (4x)$ là:", "options": ["$3x^2$", "$3x$", "$3$", "$8x^2$"], "ans": 0, "exp": "$12 : 4 = 3$; $x^3 : x = x^2 \\Rightarrow 3x^2$."}, {"id": "8_4_2", "type": "mcq", "q": "Kết quả của $(-18x^2y^3) : (6xy^2)$ là:", "options": ["$-3xy$", "$3xy$", "$-3x^2y$", "$-3y$"], "ans": 0, "exp": "$-18 : 6 = -3$; $x^2:x=x; y^3:y^2=y \\Rightarrow -3xy$."}, {"id": "8_4_3", "type": "mcq", "q": "Thực hiện phép chia $(8x^3 - 4x^2 + 6x) : (2x)$ ta được:", "options": ["$4x^2 - 2x + 3$", "$4x^2 - 2x$", "$4x^2 - 4x + 3$", "$4x^3 - 2x^2 + 3x$"], "ans": 0, "exp": "Chia từng hạng tử: $8x^3 : 2x = 4x^2$; $-4x^2:2x = -2x$; $6x:2x = 3$."}, {"id": "8_4_4", "type": "mcq", "q": "Đơn thức $A$ chia hết cho đơn thức $B$ khi:", "options": ["Hệ số của $A$ chia hết cho hệ số của $B$", "Mỗi biến của $B$ đều là biến của $A$ với số mũ không lớn hơn số mũ của nó trong $A$", "Số mũ của $B$ lớn hơn của $A$", "Bậc của $A$ nhỏ hơn bậc của $B$"], "ans": 1, "exp": "Định nghĩa chia hết của hai đơn thức: Mỗi biến của $B$ đều là biến của $A$ với số mũ $\\le$ số mũ trong $A$."}, {"id": "8_4_5", "type": "tf", "q": "Kết quả của $(3x^2y) : (3x^2y)$ bằng 0.", "ans": "sai", "exp": "Sai. Hai biểu thức giống nhau chia nhau bằng 1, không phải bằng 0!"}, {"id": "8_4_6", "type": "tf", "q": "Đa thức $x^2y + xy^2$ chia hết cho đơn thức $xy$.", "ans": "dung", "exp": "Đúng. Cả hai hạng tử đều chứa $xy$ với số mũ $\\ge 1$."}, {"id": "8_4_7", "type": "short", "q": "Chia đơn thức: $24x^4y^2 : (8x^2y)$. Hệ số của thương là bao nhiêu?", "ans": "3", "unit": "", "exp": "$24 : 8 = 3$."}, {"id": "8_4_8", "type": "short", "q": "Thực hiện phép chia: $(12x^3y - 6x^2y) : (2x^2y)$. Hệ số tự do của thương bằng bao nhiêu? (chú ý dấu):", "ans": "-3", "unit": "", "exp": "$-6x^2y : 2x^2y = -3$."}, {"id": "8_4_9", "type": "short", "q": "Tính giá trị của $M = (9x^2y^2 - 6xy^3) : (3xy^2)$ tại $x = 2, y = 1$:", "ans": "4", "unit": "", "exp": "$M = 3x - 2y = 3(2) - 2(1) = 6 - 2 = 4$."}, {"id": "8_4_10", "type": "short", "q": "Tìm hệ số của $x^2y$ khi chia $(15x^4y^3) : (5x^2y^2)$:", "ans": "3", "unit": "", "exp": "$15 : 5 = 3$."}]}, {"id": "g5", "name": "Dạng 5: Ba hằng đẳng thức đáng nhớ", "theory": ["1. Bình phương của một tổng: $(A + B)^2 = A^2 + 2AB + B^2$.", "2. Bình phương của một hiệu: $(A - B)^2 = A^2 - 2AB + B^2$.", "3. Hiệu hai bình phương: $A^2 - B^2 = (A - B)(A + B)$."], "example": {"title": "Khai triển hằng đẳng thức", "prob": "Khai triển: a) $(x + 3)^2$; b) $(2x - 1)^2$; c) $x^2 - 16$", "sol": "a) $x^2 + 6x + 9$.<br>b) $(2x)^2 - 2(2x)(1) + 1^2 = 4x^2 - 4x + 1$.<br>c) $(x - 4)(x + 4)$."}, "questions": [{"id": "8_5_1", "type": "mcq", "q": "Khai triển hằng đẳng thức $(x + 2)^2$ ta được:", "options": ["$x^2 + 4x + 4$", "$x^2 + 2x + 4$", "$x^2 + 4$", "$x^2 + 4x + 2$"], "ans": 0, "exp": "$x^2 + 2 \\cdot x \\cdot 2 + 2^2 = x^2 + 4x + 4$."}, {"id": "8_5_2", "type": "mcq", "q": "Khai triển hằng đẳng thức $(x - 3)^2$ ta được:", "options": ["$x^2 - 6x + 9$", "$x^2 - 3x + 9$", "$x^2 - 9$", "$x^2 + 6x + 9$"], "ans": 0, "exp": "$x^2 - 2 \\cdot x \\cdot 3 + 3^2 = x^2 - 6x + 9$."}, {"id": "8_5_3", "type": "mcq", "q": "Biểu thức $x^2 - 9$ viết dưới dạng tích là:", "options": ["$(x - 3)(x + 3)$", "$(x - 9)(x + 9)$", "$(x - 3)^2$", "$(x + 3)^2$"], "ans": 0, "exp": "$x^2 - 3^2 = (x - 3)(x + 3)$."}, {"id": "8_5_4", "type": "mcq", "q": "Khai triển $(2x - 1)^2$ ta được:", "options": ["$4x^2 - 4x + 1$", "$2x^2 - 4x + 1$", "$4x^2 - 1$", "$4x^2 - 2x + 1$"], "ans": 0, "exp": "$(2x)^2 - 2(2x)(1) + 1^2 = 4x^2 - 4x + 1$."}, {"id": "8_5_5", "type": "tf", "q": "Đẳng thức: $(A - B)^2 = A^2 - B^2$ là đúng.", "ans": "sai", "exp": "Sai lầm kinh điển! $(A - B)^2 = A^2 - 2AB + B^2$, khác hoàn toàn với $A^2 - B^2$."}, {"id": "8_5_6", "type": "tf", "q": "Biểu thức $x^2 + 6x + 9$ viết được dưới dạng $(x + 3)^2$.", "ans": "dung", "exp": "Đúng. $x^2 + 2 \\cdot x \\cdot 3 + 3^2 = (x + 3)^2$."}, {"id": "8_5_7", "type": "short", "q": "Khai triển $(x + 5)^2$. Hệ số của $x$ bằng bao nhiêu?", "ans": "10", "unit": "", "exp": "$2 \\cdot x \\cdot 5 = 10x$, hệ số là 10."}, {"id": "8_5_8", "type": "short", "q": "Tính nhanh giá trị của $101^2$:", "ans": "10201", "unit": "", "exp": "$(100 + 1)^2 = 10000 + 200 + 1 = 10201$."}, {"id": "8_5_9", "type": "short", "q": "Tính nhanh giá trị của $52 \\cdot 48$:", "ans": "2496", "unit": "", "exp": "$(50 + 2)(50 - 2) = 50^2 - 2^2 = 2500 - 4 = 2496$."}, {"id": "8_5_10", "type": "short", "q": "Rút gọn $A = (x + 2)^2 - (x - 2)^2$. Với $x = 3$ thì $A$ bằng bao nhiêu?", "ans": "24", "unit": "", "exp": "$A = 8x$. Với $x = 3 \\Rightarrow A = 8 \\cdot 3 = 24$."}]}, {"id": "g6", "name": "Dạng 6: Tứ giác & Tổng bốn góc", "theory": ["Định lý: Tổng bốn góc của một tứ giác luôn bằng $360^\\circ$:\n  $\\widehat{A} + \\widehat{B} + \\widehat{C} + \\widehat{D} = 360^\\circ$.", "Tính góc còn lại: $\\widehat{D} = 360^\\circ - (\\widehat{A} + \\widehat{B} + \\widehat{C})$."], "example": {"title": "Tính số đo góc trong tứ giác", "prob": "Tứ giác $ABCD$ có $\\widehat{A} = 70^\\circ, \\widehat{B} = 80^\\circ, \\widehat{C} = 110^\\circ$. Tính góc $\\widehat{D}$.", "sol": "$\\widehat{D} = 360^\\circ - (70^\\circ + 80^\\circ + 110^\\circ) = 360^\\circ - 260^\\circ = 100^\\circ$."}, "questions": [{"id": "8_6_1", "type": "mcq", "q": "Tổng số đo bốn góc trong một tứ giác lồi luôn bằng:", "options": ["$180^\\circ$", "$360^\\circ$", "$90^\\circ$", "$270^\\circ$"], "ans": 1, "exp": "Định lý: Tổng các góc của một tứ giác luôn bằng $360^\\circ$."}, {"id": "8_6_2", "type": "mcq", "q": "Tứ giác $ABCD$ có $\\widehat{A} = 60^\\circ, \\widehat{B} = 110^\\circ, \\widehat{C} = 75^\\circ$. Số đo của góc $\\widehat{D}$ là:", "options": ["$115^\\circ$", "$105^\\circ$", "$125^\\circ$", "$95^\\circ$"], "ans": 0, "exp": "$\\widehat{D} = 360^\\circ - (60^\\circ + 110^\\circ + 75^\\circ) = 360^\\circ - 245^\\circ = 115^\\circ$."}, {"id": "8_6_3", "type": "mcq", "q": "Một tứ giác có thể có nhiều nhất bao nhiêu góc nhọn?", "options": ["1 góc", "2 góc", "3 góc", "4 góc"], "ans": 2, "exp": "Nhiều nhất là 3 góc nhọn. Nếu có 4 góc nhọn thì tổng sẽ nhỏ hơn $360^\\circ$ (vô lý)."}, {"id": "8_6_4", "type": "mcq", "q": "Tứ giác có 3 góc vuông thì góc thứ tư là:", "options": ["Góc nhọn", "Góc vuông ($90^\\circ$)", "Góc tù", "Góc bẹt"], "ans": 1, "exp": "$360^\\circ - 3 \\cdot 90^\\circ = 90^\\circ$ (góc vuông)."}, {"id": "8_6_5", "type": "tf", "q": "Tổng các góc ngoài tại các đỉnh của một tứ giác bằng $360^\\circ$.", "ans": "dung", "exp": "Đúng. Tổng các góc ngoài của bất kì đa giác lồi nào cũng bằng $360^\\circ$."}, {"id": "8_6_6", "type": "tf", "q": "Tứ giác có 4 góc đều là góc tù.", "ans": "sai", "exp": "Sai. Vì góc tù $> 90^\\circ$, 4 góc tù sẽ có tổng $> 360^\\circ$ (vô lý)."}, {"id": "8_6_7", "type": "short", "q": "Tứ giác $ABCD$ có $\\widehat{A} = 90^\\circ, \\widehat{B} = 90^\\circ, \\widehat{C} = 120^\\circ$. Tính góc $\\widehat{D}$ (đơn vị độ):", "ans": "60", "unit": "độ", "exp": "$360^\\circ - (90 + 90 + 120) = 360 - 300 = 60^\\circ$."}, {"id": "8_6_8", "type": "short", "q": "Tứ giác $ABCD$ có $\\widehat{A} = 70^\\circ, \\widehat{B} = 80^\\circ, \\widehat{C} = 110^\\circ$. Tính góc $\\widehat{D}$ (đơn vị độ):", "ans": "100", "unit": "độ", "exp": "$360^\\circ - 260^\\circ = 100^\\circ$."}, {"id": "8_6_9", "type": "short", "q": "Cho tứ giác $ABCD$ có $\\widehat{A} = \\widehat{B} = 85^\\circ, \\widehat{C} = 95^\\circ$. Tính góc $\\widehat{D}$ (đơn vị độ):", "ans": "95", "unit": "độ", "exp": "$360^\\circ - (85 + 85 + 95) = 360 - 265 = 95^\\circ$."}, {"id": "8_6_10", "type": "short", "q": "Một tứ giác có các góc tỉ lệ $1 : 2 : 3 : 4$. Góc lớn nhất của tứ giác đó bằng bao nhiêu độ?", "ans": "144", "unit": "độ", "exp": "Tổng 10 phần $= 360^\\circ \\Rightarrow 1$ phần $= 36^\\circ$. Góc lớn nhất $= 36 \\cdot 4 = 144^\\circ$."}]}, {"id": "g7", "name": "Dạng 7: Hình thang cân & Bình hành", "theory": ["Hình thang cân: Hai cạnh bên bằng nhau, hai góc kề một đáy bằng nhau, hai đường chéo BẰNG NHAU.", "Hình bình hành: Các cạnh đối song song và bằng nhau, các góc đối bằng nhau, hai đường chéo CẮT NHAU TẠI TRUNG ĐIỂM.", "Hai góc kề một cạnh của hình bình hành luôn bù nhau ($180^\\circ$)."], "example": {"title": "Tính cạnh và góc của hình thang cân & bình hành", "prob": "Hình bình hành $ABCD$ có $AB = 6\\text{ cm}, BC = 4\\text{ cm}, \\widehat{A} = 60^\\circ$. Tính $CD$ và $\\widehat{C}$.", "sol": "Cạnh đối $CD = AB = 6\\text{ cm}$. Góc đối $\\widehat{C} = \\widehat{A} = 60^\\circ$."}, "questions": [{"id": "8_7_1", "type": "mcq", "q": "Hình thang cân là hình thang có:", "options": ["Hai cạnh bên song song", "Hai góc kề một đáy bằng nhau", "Hai góc đối bằng nhau", "Hai đường chéo vuông góc"], "ans": 1, "exp": "Định nghĩa hình thang cân: Hình thang có hai góc kề một đáy bằng nhau."}, {"id": "8_7_2", "type": "mcq", "q": "Tứ giác có hai đường chéo cắt nhau tại trung điểm của mỗi đường là:", "options": ["Hình bình hành", "Hình thang cân", "Hình thang vuông", "Tứ giác bất kì"], "ans": 0, "exp": "Dấu hiệu nhận biết hình bình hành: Tứ giác có hai đường chéo cắt nhau tại trung điểm của mỗi đường."}, {"id": "8_7_3", "type": "mcq", "q": "Cho hình thang cân $ABCD$ có hai đáy $AB$ và $CD$. Khẳng định nào sau đây là <b>sai</b>?", "options": ["$AD = BC$", "$AC = BD$", "$\\widehat{C} = \\widehat{D}$", "$\\widehat{A} = \\widehat{C}$"], "ans": 3, "exp": "Trong hình thang cân, hai góc kề một đáy bằng nhau ($\\widehat{A} = \\widehat{B}, \\widehat{C} = \\widehat{D}$), chứ hai góc đối $\\widehat{A}$ và $\\widehat{C}$ không bằng nhau (chúng bù nhau)."}, {"id": "8_7_4", "type": "mcq", "q": "Hình bình hành có hai đường chéo vuông góc với nhau là:", "options": ["Hình chữ nhật", "Hình thoi", "Hình thang cân", "Hình vuông"], "ans": 1, "exp": "Dấu hiệu nhận biết: Hình bình hành có 2 đường chéo vuông góc là hình thoi."}, {"id": "8_7_5", "type": "tf", "q": "Trong hình bình hành, hai góc đối diện luôn bằng nhau.", "ans": "dung", "exp": "Đúng. Tính chất hình bình hành: Các góc đối bằng nhau."}, {"id": "8_7_6", "type": "tf", "q": "Hình thang có hai đường chéo bằng nhau là hình bình hành.", "ans": "sai", "exp": "Sai. Hình thang có hai đường chéo bằng nhau là HÌNH THANG CÂN."}, {"id": "8_7_7", "type": "short", "q": "Hình thang cân $ABCD$ có đường chéo $AC = 7\\text{ cm}$. Đường chéo $BD$ dài bao nhiêu cm?", "ans": "7", "unit": "cm", "exp": "Hình thang cân có hai đường chéo bằng nhau nên $BD = 7\\text{ cm}$."}, {"id": "8_7_8", "type": "short", "q": "Hình bình hành có chu vi 24cm, biết một cạnh dài 7cm. Cạnh kề của nó dài bao nhiêu cm?", "ans": "5", "unit": "cm", "exp": "Nửa chu vi $= 24 : 2 = 12\\text{ cm}$. Cạnh kề $= 12 - 7 = 5\\text{ cm}$."}, {"id": "8_7_9", "type": "short", "q": "Hình bình hành $ABCD$ có $\\widehat{A} = 110^\\circ$. Góc đối diện $\\widehat{C}$ bằng bao nhiêu độ?", "ans": "110", "unit": "độ", "exp": "Góc đối bằng nhau nên $\\widehat{C} = \\widehat{A} = 110^\\circ$."}, {"id": "8_7_10", "type": "short", "q": "Hình bình hành $ABCD$ có $\\widehat{A} = 70^\\circ$. Góc kề $\\widehat{B}$ bằng bao nhiêu độ?", "ans": "110", "unit": "độ", "exp": "Hai góc kề bù nhau: $\\widehat{B} = 180^\\circ - 70^\\circ = 110^\\circ$."}]}];
+
+function applyRemixLogic(genre) {
+    if (genre.id === 'g1') {
+        const p1 = Math.floor(Math.random() * 4) + 2;
+        const p2 = Math.floor(Math.random() * 3) + 1;
+        const p3 = Math.floor(Math.random() * 3) + 1;
+        const deg = p1 + p2 + p3;
+        const qShort = genre.questions.find(q => q.id === '8_1_7');
+        if (qShort) {
+            qShort.q = `Bậc của đơn thức $5x^${p1}y^${p2}z^${p3}$ bằng bao nhiêu?`;
+            qShort.ans = deg.toString();
+            qShort.exp = `Tổng các số mũ: $${p1} + ${p2} + ${p3} = ${deg}$.`;
+        }
+    } else if (genre.id === 'g2') {
+        const x = Math.floor(Math.random() * 3) + 1;
+        const y = Math.floor(Math.random() * 2) + 1;
+        const val = 2*(x*x) - 3*x*y;
+        const qShort = genre.questions.find(q => q.id === '8_2_7');
+        if (qShort) {
+            qShort.q = `Tính giá trị của đa thức $A = 2x^2 - 3xy$ tại $x = ${x}, y = ${y}$:`;
+            qShort.ans = val.toString();
+            qShort.exp = `$A = 2(${x}^2) - 3(${x})(${y}) = ${2*x*x} - ${3*x*y} = ${val}$.`;
+        }
+    } else if (genre.id === 'g3') {
+        const a = Math.floor(Math.random() * 5) + 2;
+        const qShort = genre.questions.find(q => q.id === '8_3_7');
+        if (qShort) {
+            qShort.q = `Khai triển $2x^2 \\cdot (x^2 - ${a}x + 2)$. Hệ số của $x^3$ là bao nhiêu? (chú ý dấu):`;
+            qShort.ans = (-2 * a).toString();
+            qShort.exp = `$2x^2 \\cdot (-${a}x) = -${2*a}x^3$, hệ số là ${-2*a}.`;
+        }
+    } else if (genre.id === 'g4') {
+        const c = Math.floor(Math.random() * 4) + 2;
+        const k = Math.floor(Math.random() * 4) + 2;
+        const total = c * k;
+        const qShort = genre.questions.find(q => q.id === '8_4_7');
+        if (qShort) {
+            qShort.q = `Chia đơn thức: $${total}x^4y^2 : (${k}x^2y)$. Hệ số của thương là bao nhiêu?`;
+            qShort.ans = c.toString();
+            qShort.exp = `$${total} : ${k} = ${c}$.`;
+        }
+    } else if (genre.id === 'g5') {
+        const a = Math.floor(Math.random() * 5) + 3;
+        const qShort = genre.questions.find(q => q.id === '8_5_7');
+        if (qShort) {
+            qShort.q = `Khai triển $(x + ${a})^2$. Hệ số của $x$ bằng bao nhiêu?`;
+            qShort.ans = (2 * a).toString();
+            qShort.exp = `$2 \\cdot x \\cdot ${a} = ${2*a}x$, hệ số là ${2*a}.`;
+        }
+    } else if (genre.id === 'g6') {
+        const a1 = Math.floor(Math.random() * 20) + 60;
+        const a2 = Math.floor(Math.random() * 30) + 80;
+        const a3 = Math.floor(Math.random() * 20) + 90;
+        const a4 = 360 - (a1 + a2 + a3);
+        const qShort = genre.questions.find(q => q.id === '8_6_8');
+        if (qShort) {
+            qShort.q = `Tứ giác $ABCD$ có $\\widehat{A} = ${a1}^\\circ, \\widehat{B} = ${a2}^\\circ, \\widehat{C} = ${a3}^\\circ$. Tính góc $\\widehat{D}$ (đơn vị độ):`;
+            qShort.ans = a4.toString();
+            qShort.exp = `$360^\\circ - (${a1} + ${a2} + ${a3}) = 360 - ${a1+a2+a3} = ${a4}^\\circ$.`;
+        }
+    } else if (genre.id === 'g7') {
+        const diag = Math.floor(Math.random() * 8) + 6;
+        const qShort = genre.questions.find(q => q.id === '8_7_7');
+        if (qShort) {
+            qShort.q = `Hình thang cân $ABCD$ có đường chéo $AC = ${diag}\\text{ cm}$. Đường chéo $BD$ dài bao nhiêu cm?`;
+            qShort.ans = diag.toString();
+            qShort.exp = `Hình thang cân có hai đường chéo bằng nhau nên $BD = ${diag}\\text{ cm}$.`;
+        }
+    }
+}
+
+</script>
+
+
+<div id="toast"><i class="fas fa-bell" style="color: #F59E0B;"></i> <span id="toastMsg"></span></div>
+
+<!-- Modal Cài đặt Google Sheet -->
+<div class="modal-overlay" id="gsheetModal">
+    <div class="modal-box">
+        <div style="display:inline-flex; align-items:center; gap:6px; background:#DCFCE7; color:#166534; font-size:12px; font-weight:700; padding:4px 12px; border-radius:15px; margin-bottom:12px;">
+            <i class="fas fa-check-circle"></i> Trạng thái: ĐÃ KÍCH HOẠT SẴN SÀNG
+        </div>
+        <h3><i class="fas fa-file-excel" style="color: #059669;"></i> Kết nối Google Sheets của Thầy/Cô</h3>
+        <p>Hệ thống đã tự động kích hoạt đường link <b>URL Google Apps Script</b> để nhận bài làm trực tiếp từ học sinh:</p>
+        <input type="text" class="modal-input" id="webhookUrlInput" placeholder="https://script.google.com/macros/s/.../exec" value="https://script.google.com/macros/s/AKfycbyZMrBQFoH83-P8JWnhNm145z4-wKJVlqxMdT5fFomkEE51V3adu_lObQuscoCXv-Ao/exec" />
+        <div style="font-size: 12.5px; color: #64748B; margin-bottom: 16px;">
+            <i class="fas fa-info-circle"></i> Điểm số, thời gian, tên và lớp của học sinh sẽ tự động cập nhật vào Bảng tính theo thời gian thực (GMT+7).
+        </div>
+        <div class="modal-actions">
+            <button class="btn-modal-cancel" onclick="closeSheetConfigModal()">Đóng</button>
+            <button class="btn-modal-save" onclick="saveSheetUrl()">Lưu thay đổi</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Giao bài cho Học sinh -->
+<div class="modal-overlay" id="assignModal">
+    <div class="modal-box" style="max-width: 580px;">
+        <div style="display:inline-flex; align-items:center; gap:6px; background:#DCFCE7; color:#166534; font-size:12px; font-weight:700; padding:4px 12px; border-radius:15px; margin-bottom:12px;">
+            <i class="fas fa-check-circle"></i> ĐÃ TRỘN ĐỀ XONG • SẴN SÀNG GIAO BÀI
+        </div>
+        <h3 style="color:#0F172A; font-size:18px; margin-bottom:8px;"><i class="fas fa-paper-plane" style="color: #10B981;"></i> Giao bài cho Học sinh</h3>
+        <p style="font-size:13.5px; color:#475569; margin-bottom:15px;">Thầy/Cô đã xáo trộn đề thành công (<b id="assignExamCodeText" style="color:#D97706;">MÃ ĐỀ</b>). Chọn cách giao bài cho học sinh dưới đây:</p>
+        
+        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px; margin-bottom:14px; text-align:left;">
+            <div style="font-size:13px; font-weight:700; color:#1E293B; margin-bottom:6px;"><i class="fas fa-link" style="color:#2563EB;"></i> 1. Sao chép đường link giao bài (học sinh mở là làm bài ngay):</div>
+            <div style="display:flex; gap:8px;">
+                <input type="text" id="assignLinkInput" readonly style="flex:1; padding:8px 10px; font-size:12.5px; border:1px solid #CBD5E1; border-radius:6px; font-family:monospace; background:white;" />
+                <button onclick="copyAssignLink()" style="background:#2563EB; color:white; border:none; border-radius:6px; padding:0 14px; font-size:12.5px; font-weight:700; cursor:pointer;"><i class="fas fa-copy"></i> Chép link</button>
+            </div>
+            <div style="font-size:11.5px; color:#64748B; margin-top:5px;">Học sinh mở link này sẽ làm bài đúng mã đề trên và <b>không thể tự ý trộn câu hỏi</b>!</div>
+        </div>
+
+        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px; margin-bottom:18px; text-align:left;">
+            <div style="font-size:13px; font-weight:700; color:#1E293B; margin-bottom:6px;"><i class="fas fa-file-download" style="color:#059669;"></i> 2. Tải file HTML giao bài (Gửi qua Zalo / Classroom / Offline):</div>
+            <button onclick="downloadStudentHtmlFile()" style="background:#059669; color:white; border:none; border-radius:6px; padding:9px 16px; font-size:13px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
+                <i class="fas fa-download"></i> Tải file .html bài làm cho học sinh
+            </button>
+            <div style="font-size:11.5px; color:#64748B; margin-top:5px;">File này đã được chốt cứng thứ tự câu hỏi và khoá hoàn toàn các nút trộn của giáo viên.</div>
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn-modal-cancel" onclick="closeAssignModal()">Đóng</button>
+            <button onclick="switchToStudentView()" style="background:#10B981; color:white; border:none; padding:9px 18px; border-radius:8px; font-weight:700; font-size:13.5px; cursor:pointer;"><i class="fas fa-user-graduate"></i> Mở xem thử giao diện Học sinh</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const currentGrade = 8;
+const urlParams = new URLSearchParams(window.location.search);
+// Mặc định là Chế độ Học sinh (an toàn tuyệt đối), chỉ kích hoạt Bàn Giáo viên khi có mode=teacher
+let isTeacherMode = urlParams.get('mode') === 'teacher';
+let currentExamCode = urlParams.get('code') || localStorage.getItem('thcs_exam_code_' + currentGrade) || ("MÃ ĐỀ " + currentGrade + "01");
+let activeGenreId = 'g1';
+let currentGenresData = JSON.parse(JSON.stringify(rawGenresData));
+const answeredMap = {};
+
+function renderModeTopBar() {
+    const bar = document.getElementById('modeTopBar');
+    if (!bar) return;
+    if (isTeacherMode) {
+        bar.style.background = '#0F172A';
+        bar.style.borderColor = '#334155';
+        bar.innerHTML = `
+            <div class="mode-info">
+                <span class="badge-mode badge-teacher"><i class="fas fa-chalkboard-teacher"></i> BÀN LÀM VIỆC CỦA GIÁO VIÊN</span>
+                <span class="badge-exam-code"><i class="fas fa-qrcode"></i> <b>${currentExamCode}</b></span>
+                <span style="color: #94A3B8; font-size: 12px;">(Thầy/Cô trộn đề xong nhấn "Giao bài cho học sinh")</span>
+            </div>
+            <div class="mode-actions">
+                <button class="btn-mode-act btn-m-shuffle" onclick="teacherShuffleAll()"><i class="fas fa-random"></i> Trộn câu hỏi (Sinh đề mới)</button>
+                <button class="btn-mode-act btn-m-remix" onclick="teacherRemixAll()"><i class="fas fa-dice"></i> Đổi số liệu (Remix)</button>
+                <button class="btn-mode-act btn-m-assign" onclick="teacherAssignModal()"><i class="fas fa-paper-plane"></i> GIAO BÀI CHO HỌC SINH</button>
+                <button class="btn-mode-act btn-m-toggle" onclick="toggleModePreview()"><i class="fas fa-eye"></i> Xem dạng Học sinh</button>
+            </div>
+        `;
+    } else {
+        bar.style.background = '#064E3B';
+        bar.style.borderColor = '#059669';
+        bar.innerHTML = `
+            <div class="mode-info">
+                <span class="badge-mode badge-student"><i class="fas fa-user-graduate"></i> BÀI LÀM CỦA HỌC SINH</span>
+                <span class="badge-exam-code"><i class="fas fa-qrcode"></i> <b>${currentExamCode}</b></span>
+                <span style="color: #6EE7B7; font-size: 12.5px;"><i class="fas fa-check-circle"></i> Đề thi chính thức do Giáo viên giao</span>
+            </div>
+            <div class="mode-actions">
+                <span style="font-size: 12.5px; color: #D1FAE5; font-weight:600;"><i class="fas fa-pen-nib"></i> Nhập Họ tên, Lớp, làm bài và nhấn Nộp bài</span>
+            </div>
+        `;
+    }
+
+    // Khi ở Chế độ Học sinh: Ẩn nút Cài đặt Google Sheet và các nút in/làm lại từ đầu
+    const cfgBtn = document.getElementById('btnGsheetConfig');
+    if (cfgBtn) cfgBtn.style.display = isTeacherMode ? 'inline-flex' : 'none';
+
+    const scoreActions = document.querySelector('.score-bar-actions');
+    if (scoreActions) scoreActions.style.display = isTeacherMode ? 'flex' : 'none';
+}
+
+function teacherShuffleAll() {
+    const randNum = Math.floor(Math.random() * 90) + 10;
+    currentExamCode = "MÃ ĐỀ " + currentGrade + randNum;
+    localStorage.setItem('thcs_exam_code_' + currentGrade, currentExamCode);
+    
+    currentGenresData.forEach(genre => {
+        for (let i = genre.questions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [genre.questions[i], genre.questions[j]] = [genre.questions[j], genre.questions[i]];
+        }
+        genre.questions.forEach(q => {
+            if (q.type === 'mcq' && q.options) {
+                const correctText = q.options[q.ans];
+                for (let i = q.options.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [q.options[i], q.options[j]] = [q.options[j], q.options[i]];
+                }
+                q.ans = q.options.indexOf(correctText);
+            }
+        });
+    });
+    
+    for (let k in answeredMap) delete answeredMap[k];
+    renderModeTopBar();
+    renderActiveGenre();
+    updateScore();
+    showToast("🎉 Đã trộn toàn bộ câu hỏi đề Toán " + currentGrade + "! " + currentExamCode);
+}
+
+function teacherRemixAll() {
+    currentGenresData.forEach(genre => {
+        if (typeof applyRemixLogic === 'function') {
+            applyRemixLogic(genre);
+        }
+    });
+    for (let k in answeredMap) delete answeredMap[k];
+    renderModeTopBar();
+    renderActiveGenre();
+    updateScore();
+    showToast("🎲 Đã đổi toàn bộ số liệu bài toán đề Toán " + currentGrade + "!");
+}
+
+function teacherAssignModal() {
+    document.getElementById('assignExamCodeText').innerText = currentExamCode;
+    const url = new URL(window.location.href);
+    url.searchParams.set('mode', 'student');
+    url.searchParams.set('code', currentExamCode);
+    document.getElementById('assignLinkInput').value = url.href;
+    document.getElementById('assignModal').style.display = 'flex';
+}
+
+function closeAssignModal() {
+    document.getElementById('assignModal').style.display = 'none';
+}
+
+function copyAssignLink() {
+    const input = document.getElementById('assignLinkInput');
+    input.select();
+    navigator.clipboard.writeText(input.value).then(() => {
+        showToast("Đã chép link giao bài cho học sinh!");
+    }).catch(() => {
+        prompt("Sao chép link này để gửi học sinh:", input.value);
+    });
+}
+
+function switchToStudentView() {
+    closeAssignModal();
+    isTeacherMode = false;
+    renderModeTopBar();
+    renderActiveGenre();
+    showToast("Đang ở Chế độ Học sinh (Nút trộn đề đã bị ẩn)!");
+}
+
+function toggleModePreview() {
+    isTeacherMode = !isTeacherMode;
+    renderModeTopBar();
+    renderActiveGenre();
+    if (isTeacherMode) {
+        showToast("Đã mở Bàn làm việc Giáo viên!");
+    } else {
+        showToast("Đã chuyển sang Giao diện Học sinh làm bài (Nút trộn bị ẩn)!");
+    }
+}
+
+function downloadStudentHtmlFile() {
+    let fullHtml = document.documentElement.outerHTML;
+    fullHtml = fullHtml.replace(/let isTeacherMode = true;/g, "let isTeacherMode = false;");
+    const jsonStr = JSON.stringify(currentGenresData);
+    fullHtml = fullHtml.replace(/const rawGenresData = \[.*?\];/s, "const rawGenresData = " + jsonStr + ";");
+    
+    const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = "DE_ON_TAP_TOAN_" + currentGrade + "_" + currentExamCode.replace(/\s+/g, '_') + "_GIAO_HOC_SINH.html";
+    a.click();
+    showToast("Đã tải file bài làm giao học sinh thành công!");
+}
+
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toastMsg').innerText = msg;
+    toast.style.display = 'flex';
+    setTimeout(() => { toast.style.display = 'none'; }, 3000);
+}
+
+function updateScore() {
+    const correctCount = Object.values(answeredMap).filter(v => v === true).length;
+    let totalQuestions = 0;
+    currentGenresData.forEach(g => totalQuestions += g.questions.length);
+    document.getElementById('scoreBadge').innerText = correctCount + ' / ' + totalQuestions;
+}
+
+function switchTab(genreId) {
+    activeGenreId = genreId;
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        if (btn.getAttribute('data-id') === genreId) btn.classList.add('active');
+    });
+    renderActiveGenre();
+}
+
+function safeTypeset() {
+    if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
+        try {
+            MathJax.typesetPromise().catch(() => {});
+        } catch(e) {}
+    }
+}
+
+function renderActiveGenre() {
+    const container = document.getElementById('genreContainer');
+    const genre = currentGenresData.find(g => g.id === activeGenreId);
+    if (!genre) return;
+
+    let theoryItems = genre.theory.map(t => '<li>' + t + '</li>').join('');
+    
+    let qCards = '';
+    genre.questions.forEach((q, qIdx) => {
+        const qNum = qIdx + 1;
+        let typeTag = '';
+        let actionHtml = '';
+
+        if (q.type === 'mcq') {
+            typeTag = '<span class="badge badge-mcq"><i class="fas fa-list-ul"></i> Trắc nghiệm 4 lựa chọn</span>';
+            const labels = ['A', 'B', 'C', 'D'];
+            let opts = q.options.map((opt, oI) => `
+                <button class="opt-btn" id="btn_${q.id}_${oI}" onclick="checkMCQ('${q.id}', ${oI}, ${q.ans})">
+                    <b>${labels[oI]}.</b> ${opt}
+                </button>
+            `).join('');
+            actionHtml = `<div class="mcq-grid">${opts}</div>`;
+        } else if (q.type === 'tf') {
+            typeTag = '<span class="badge badge-tf"><i class="fas fa-check-double"></i> Đúng hay Sai?</span>';
+            actionHtml = `
+                <div class="tf-wrap">
+                    <button class="btn-tf btn-dung" id="btn_${q.id}_dung" onclick="checkTF('${q.id}', 'dung', '${q.ans}')"><i class="fas fa-check"></i> ĐÚNG</button>
+                    <button class="btn-tf btn-sai" id="btn_${q.id}_sai" onclick="checkTF('${q.id}', 'sai', '${q.ans}')"><i class="fas fa-times"></i> SAI</button>
+                </div>
+            `;
+        } else if (q.type === 'short') {
+            typeTag = '<span class="badge badge-short"><i class="fas fa-pen-nib"></i> Điền kết quả</span>';
+            const unitStr = q.unit ? `<span class="unit">${q.unit}</span>` : '';
+            actionHtml = `
+                <div class="short-wrap">
+                    <label>Đáp số:</label>
+                    <input type="text" id="input_${q.id}" placeholder="Nhập số..." onkeydown="if(event.key==='Enter') checkShort('${q.id}', '${q.ans}')" />
+                    ${unitStr}
+                    <button class="btn-check" onclick="checkShort('${q.id}', '${q.ans}')"><i class="fas fa-paper-plane"></i> Kiểm tra</button>
+                </div>
+            `;
+        }
+
+        qCards += `
+            <div class="q-card" id="card_${q.id}">
+                <div class="q-header">
+                    <span class="q-index">Câu ${qNum}</span>
+                    ${typeTag}
+                </div>
+                <div class="q-prompt">${q.q}</div>
+                <div class="q-actions">${actionHtml}</div>
+                <div class="result-msg" id="res_${q.id}"></div>
+                <div class="exp-box" id="exp_${q.id}">
+                    <i class="fas fa-lightbulb"></i> <b>Giải thích chi tiết:</b> ${q.exp}
+                </div>
+            </div>
+        `;
+    });
+
+    let toolbarHtml = '';
+    if (isTeacherMode) {
+        toolbarHtml = `
+            <div class="genre-toolbar">
+                <div class="toolbar-title"><i class="fas fa-sliders-h" style="color:var(--primary);"></i> Công cụ Giáo viên (Dạng bài này):</div>
+                <div class="toolbar-actions">
+                    <button class="tool-btn btn-shuffle" onclick="shuffleGenre('${genre.id}')"><i class="fas fa-random"></i> Trộn câu hỏi dạng này</button>
+                    <button class="tool-btn btn-remix" onclick="remixGenre('${genre.id}')"><i class="fas fa-dice"></i> Đổi số liệu dạng này</button>
+                    <button class="tool-btn btn-reset-genre" onclick="resetGenre('${genre.id}')"><i class="fas fa-undo"></i> Làm lại</button>
+                </div>
+            </div>
+        `;
+    } else {
+        toolbarHtml = `
+            <div class="genre-toolbar" style="background: #F0FDF4; border: 1.5px solid #86EFAC;">
+                <div class="toolbar-title" style="color: #166534;"><i class="fas fa-tasks"></i> Câu hỏi tự luyện • <span style="font-weight:800; color:#059669;">${currentExamCode}</span> • Em hãy chọn đáp án cho từng câu hỏi bên dưới</div>
+            </div>
+        `;
+    }
+
+    container.innerHTML = `
+        <div class="genre-section active">
+            <div class="genre-header-box">
+                <h2>${genre.name} <span class="genre-count">(${genre.questions.length} câu hỏi)</span></h2>
+            </div>
+            
+            ${toolbarHtml}
+
+            <div class="theory-box">
+                <div class="box-title"><i class="fas fa-bookmark"></i> 📌 PHƯƠNG PHÁP GIẢI & MẸO GHI NHỚ BỎ TÚI</div>
+                <ul>${theoryItems}</ul>
+            </div>
+            
+            <div class="example-box">
+                <div class="box-title"><i class="fas fa-star"></i> ★ BÀI TOÁN MẪU: ${genre.example.title}</div>
+                <div class="ex-prob"><b>Đề bài:</b> ${genre.example.prob}</div>
+                <div class="ex-sol"><b>Lời giải mẫu mực từng bước:</b><br>${genre.example.sol}</div>
+            </div>
+            
+            <div class="practice-heading">
+                <h3>✍ HỆ THỐNG CÂU HỎI TỰ LUYỆN ĐA DẠNG HÌNH THỨC:</h3>
+            </div>
+            <div class="questions-container">
+                ${qCards}
+            </div>
+        </div>
+    `;
+
+    safeTypeset();
+}
+
+// 1. TRỘN CÂU HỎI & PHƯƠNG ÁN (Fisher-Yates Shuffle)
+function shuffleGenre(genreId) {
+    const genre = currentGenresData.find(g => g.id === genreId);
+    if (!genre) return;
+
+    genre.questions.forEach(q => delete answeredMap[q.id]);
+
+    for (let i = genre.questions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [genre.questions[i], genre.questions[j]] = [genre.questions[j], genre.questions[i]];
+    }
+
+    genre.questions.forEach(q => {
+        if (q.type === 'mcq' && q.options) {
+            const correctText = q.options[q.ans];
+            for (let i = q.options.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [q.options[i], q.options[j]] = [q.options[j], q.options[i]];
+            }
+            q.ans = q.options.indexOf(correctText);
+        }
+    });
+
+    renderActiveGenre();
+    updateScore();
+    showToast("🔀 Đã xáo trộn ngẫu nhiên thứ tự câu hỏi và phương án A, B, C, D!");
+}
+
+// 2. SINH SỐ LIỆU MỚI / REMIX CÂU HỎI
+function remixGenre(genreId) {
+    const genre = currentGenresData.find(g => g.id === genreId);
+    if (!genre) return;
+
+    genre.questions.forEach(q => delete answeredMap[q.id]);
+
+    if (typeof applyRemixLogic === 'function') {
+        applyRemixLogic(genre);
+    }
+
+    renderActiveGenre();
+    updateScore();
+    showToast("🎲 Đã đổi số liệu mới thành công! Mời em luyện tập tiếp.");
+}
+
+// 3. LÀM LẠI DẠNG NÀY
+function resetGenre(genreId) {
+    const origGenre = rawGenresData.find(g => g.id === genreId);
+    const targetIdx = currentGenresData.findIndex(g => g.id === genreId);
+    if (origGenre && targetIdx !== -1) {
+        origGenre.questions.forEach(q => delete answeredMap[q.id]);
+        currentGenresData[targetIdx] = JSON.parse(JSON.stringify(origGenre));
+        renderActiveGenre();
+        updateScore();
+        showToast("🔄 Đã đặt lại trạng thái ban đầu của dạng bài này!");
+    }
+}
+
+// CHẤM MCQ
+function checkMCQ(qId, chosenIdx, correctIdx) {
+    const card = document.getElementById('card_' + qId);
+    const resMsg = document.getElementById('res_' + qId);
+    const expBox = document.getElementById('exp_' + qId);
+    
+    card.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
+    
+    const chosenBtn = document.getElementById('btn_' + qId + '_' + chosenIdx);
+    const correctBtn = document.getElementById('btn_' + qId + '_' + correctIdx);
+    
+    if (chosenIdx === correctIdx) {
+        chosenBtn.classList.add('chosen-correct');
+        card.classList.add('correct');
+        resMsg.className = 'result-msg show-correct';
+        resMsg.innerHTML = '<i class="fas fa-check-circle"></i> Chính xác! Em làm rất chuẩn!';
+        answeredMap[qId] = true;
+    } else {
+        chosenBtn.classList.add('chosen-wrong');
+        correctBtn.classList.add('is-answer');
+        card.classList.add('wrong');
+        resMsg.className = 'result-msg show-wrong';
+        resMsg.innerHTML = '<i class="fas fa-times-circle"></i> Chưa chính xác! Đáp án đúng đã được đánh dấu xanh.';
+        answeredMap[qId] = false;
+    }
+    
+    updateScore();
+    expBox.classList.add('show');
+    safeTypeset();
+}
+
+// CHẤM ĐÚNG / SAI
+function checkTF(qId, chosenVal, correctVal) {
+    const card = document.getElementById('card_' + qId);
+    const resMsg = document.getElementById('res_' + qId);
+    const expBox = document.getElementById('exp_' + qId);
+    
+    card.querySelectorAll('.btn-tf').forEach(b => b.disabled = true);
+    const chosenBtn = document.getElementById('btn_' + qId + '_' + chosenVal);
+    
+    if (chosenVal === correctVal) {
+        chosenBtn.classList.add('chosen-correct');
+        card.classList.add('correct');
+        resMsg.className = 'result-msg show-correct';
+        resMsg.innerHTML = '<i class="fas fa-check-circle"></i> Rất giỏi! Nhận định hoàn toàn chính xác!';
+        answeredMap[qId] = true;
+    } else {
+        chosenBtn.classList.add('chosen-wrong');
+        card.classList.add('wrong');
+        resMsg.className = 'result-msg show-wrong';
+        resMsg.innerHTML = '<i class="fas fa-times-circle"></i> Nhận định chưa đúng rồi!';
+        answeredMap[qId] = false;
+    }
+    
+    updateScore();
+    expBox.classList.add('show');
+    safeTypeset();
+}
+
+// CHẤM ĐIỀN ĐÁP SỐ
+function checkShort(qId, correctVal) {
+    const input = document.getElementById('input_' + qId);
+    const userVal = input.value.trim().toLowerCase();
+    const card = document.getElementById('card_' + qId);
+    const resMsg = document.getElementById('res_' + qId);
+    const expBox = document.getElementById('exp_' + qId);
+    
+    if (!userVal) {
+        alert("Em hãy nhập kết quả vào ô trống trước nhé!");
+        return;
+    }
+    
+    const cleanUser = userVal.replace(/\s+/g, '').replace(',', '.');
+    const cleanAns = correctVal.toString().toLowerCase().replace(/\s+/g, '').replace(',', '.');
+    
+    if (cleanUser === cleanAns) {
+        card.classList.remove('wrong');
+        card.classList.add('correct');
+        resMsg.className = 'result-msg show-correct';
+        resMsg.innerHTML = '<i class="fas fa-check-circle"></i> Tuyệt vời! Kết quả hoàn toàn chính xác!';
+        answeredMap[qId] = true;
+    } else {
+        card.classList.add('wrong');
+        resMsg.className = 'result-msg show-wrong';
+        resMsg.innerHTML = '<i class="fas fa-times-circle"></i> Chưa chính xác rồi! Em hãy xem hướng dẫn bên dưới nhé.';
+        answeredMap[qId] = false;
+    }
+    
+    updateScore();
+    expBox.classList.add('show');
+    safeTypeset();
+}
+
+// ====================================================================
+// TÍNH NĂNG KẾT NỐI & NỘP BÀI VỀ GOOGLE SHEETS
+// ====================================================================
+
+const SYSTEM_DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyZMrBQFoH83-P8JWnhNm145z4-wKJVlqxMdT5fFomkEE51V3adu_lObQuscoCXv-Ao/exec';
+
+function getActiveWebhookUrl() {
+    return localStorage.getItem('thcs_math_gsheet_url') || SYSTEM_DEFAULT_WEBHOOK_URL;
+}
+
+function openSheetConfigModal() {
+    const modal = document.getElementById('gsheetModal');
+    const currentUrl = getActiveWebhookUrl();
+    document.getElementById('webhookUrlInput').value = currentUrl;
+    modal.style.display = 'flex';
+}
+
+function closeSheetConfigModal() {
+    document.getElementById('gsheetModal').style.display = 'none';
+}
+
+function saveSheetUrl() {
+    const url = document.getElementById('webhookUrlInput').value.trim();
+    if (!url) {
+        localStorage.setItem('thcs_math_gsheet_url', SYSTEM_DEFAULT_WEBHOOK_URL);
+        showToast("Đã khôi phục liên kết Google Sheets mặc định của Thầy/Cô!");
+    } else {
+        localStorage.setItem('thcs_math_gsheet_url', url);
+        showToast("Đã kích hoạt liên kết Google Sheets thành công!");
+    }
+    closeSheetConfigModal();
+}
+
+function submitToGoogleSheet() {
+    const studentName = document.getElementById('studentName').value.trim();
+    const studentClass = document.getElementById('studentClass').value.trim();
+    
+    if (!studentName) {
+        alert("Em hãy nhập Họ và tên trước khi nộp bài nhé!");
+        document.getElementById('studentName').focus();
+        return;
+    }
+    
+    const webhookUrl = getActiveWebhookUrl();
+    
+    const genre = currentGenresData.find(g => g.id === activeGenreId);
+    let correctCount = 0;
+    genre.questions.forEach(q => {
+        if (answeredMap[q.id] === true) correctCount++;
+    });
+    const totalCount = genre.questions.length;
+    const score10 = totalCount > 0 ? ((correctCount / totalCount) * 10).toFixed(1) : 0;
+    
+    const payload = {
+        studentName: studentName,
+        studentClass: studentClass || "Chưa rõ",
+        grade: currentGrade,
+        genreName: genre.name,
+        correct: correctCount,
+        total: totalCount,
+        score10: score10
+    };
+    
+    const btnSubmit = document.querySelector('.btn-submit-gsheet');
+    const originalText = btnSubmit.innerHTML;
+    btnSubmit.disabled = true;
+    btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang nộp bài...';
+    
+    // Gửi bằng fetch POST mode no-cors
+    fetch(webhookUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(() => {
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = originalText;
+        alert("🎉 Chúc mừng em " + studentName + "!\n\nKết quả bài làm: " + correctCount + "/" + totalCount + " câu đúng (" + score10 + " điểm)\nĐã được gửi và lưu thành công về Bảng tính Google Sheets của Thầy/Cô!");
+        showToast("Đã lưu điểm vào Google Sheets thành công!");
+    }).catch(err => {
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = originalText;
+        alert("Có lỗi khi kết nối với Google Sheets: " + err.message);
+    });
+}
+
+function resetAll() {
+    if (confirm("Em có muốn làm lại toàn bộ phiếu từ đầu không?")) {
+        location.reload();
+    }
+}
+
+// Tự động tải thông tin đã lưu
+window.addEventListener('DOMContentLoaded', () => {
+    renderModeTopBar();
+    const initialTab = urlParams.get('tab') || 'g1';
+    switchTab(initialTab);
+    updateScore();
+    if (!localStorage.getItem('thcs_math_gsheet_url')) {
+        localStorage.setItem('thcs_math_gsheet_url', SYSTEM_DEFAULT_WEBHOOK_URL);
+    }
+    const savedName = localStorage.getItem('thcs_student_name');
+    const savedClass = localStorage.getItem('thcs_student_class');
+    if (savedName) document.getElementById('studentName').value = savedName;
+    if (savedClass) document.getElementById('studentClass').value = savedClass;
+    
+    document.getElementById('studentName').addEventListener('input', (e) => {
+        localStorage.setItem('thcs_student_name', e.target.value);
+    });
+    document.getElementById('studentClass').addEventListener('input', (e) => {
+        localStorage.setItem('thcs_student_class', e.target.value);
+    });
+});
+</script>
+
+
+</body>
+</html>

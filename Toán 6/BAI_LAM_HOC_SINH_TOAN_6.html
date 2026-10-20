@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BÀI LÀM ÔN TẬP TOÁN 6 - GIỮA KÌ I</title>
+    <!-- MathJax -->
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+    
+        :root {
+            --primary: #2563EB;
+            --primary-light: #EEF2FF;
+            --success: #10B981;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+            --bg-page: #F8FAFC;
+            --bg-card: #FFFFFF;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid #E2E8F0;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary), #1E3A8A);
+            color: white;
+            padding: 30px 25px;
+            text-align: center;
+        }
+        header h1 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+        header p { font-size: 14.5px; opacity: 0.95; font-weight: 500; }
+        
+        /* Student Info Bar */
+        .student-bar {
+            background: #F1F5F9;
+            padding: 14px 25px;
+            border-bottom: 1px solid #E2E8F0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .student-inputs {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .input-group-student {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .input-group-student label {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #334155;
+        }
+        .input-group-student input {
+            padding: 8px 12px;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            background: white;
+            transition: border 0.2s;
+        }
+        .input-group-student input:focus { border-color: var(--primary); }
+        
+        .student-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-gsheet-config {
+            background: white;
+            color: #0F766E;
+            border: 1.5px solid #99F6E4;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-gsheet-config:hover { background: #F0FDFA; }
+        
+        .btn-submit-gsheet {
+            background: linear-gradient(135deg, #059669, #10B981);
+            color: white;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 13.5px;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(16, 185, 129, 0.25);
+            transition: all 0.2s;
+        }
+        .btn-submit-gsheet:hover { opacity: 0.95; transform: translateY(-1px); }
+
+        /* Score Bar */
+        .score-bar {
+            background: white;
+            padding: 14px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #E2E8F0;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .score-item { font-size: 15px; font-weight: 700; color: #1E293B; }
+        .score-badge {
+            background: #EFF6FF;
+            color: var(--primary);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 16px;
+            border: 1px solid #BFDBFE;
+        }
+        .score-bar-actions { display: flex; gap: 8px; }
+        .btn-top {
+            background: #F8FAFC;
+            color: #334155;
+            border: 1px solid #CBD5E1;
+            padding: 7px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        .btn-top:hover { background: #E2E8F0; }
+
+        .tabs-nav {
+            display: flex;
+            overflow-x: auto;
+            background: #F8FAFC;
+            border-bottom: 2px solid #E2E8F0;
+            padding: 10px 15px 0 15px;
+            gap: 8px;
+        }
+        .tab-btn {
+            padding: 12px 18px;
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { color: var(--primary); }
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            background: white;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.02);
+        }
+
+        .main-content { padding: 28px 24px; }
+        
+        /* Action Toolbar */
+        .genre-toolbar {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 14px;
+            padding: 12px 16px;
+            margin-bottom: 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .toolbar-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .toolbar-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .tool-btn {
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn-shuffle {
+            background: #EDE9FE;
+            color: #6D28D9;
+            border: 1px solid #DDD6FE;
+        }
+        .btn-shuffle:hover { background: #DDD6FE; }
+        .btn-remix {
+            background: #FEF3C7;
+            color: #B45309;
+            border: 1px solid #FDE68A;
+        }
+        .btn-remix:hover { background: #FDE68A; }
+        .btn-reset-genre {
+            background: #F1F5F9;
+            color: #475569;
+            border: 1px solid #CBD5E1;
+        }
+        .btn-reset-genre:hover { background: #E2E8F0; }
+
+        .genre-header-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+        .genre-header-box h2 {
+            font-size: 20px;
+            color: var(--primary);
+            border-left: 5px solid var(--primary);
+            padding-left: 12px;
+            font-weight: 800;
+        }
+        .genre-count { font-size: 14px; font-weight: 600; color: #64748B; }
+
+        .theory-box {
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            border-left: 5px solid #3B82F6;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+        }
+        .theory-box .box-title {
+            font-weight: 800;
+            color: #1E40AF;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        .theory-box ul { padding-left: 20px; font-size: 14px; }
+        .theory-box li { margin-bottom: 6px; }
+
+        .example-box {
+            background: #FFFBEB;
+            border: 1px solid #FDE68A;
+            border-left: 5px solid #F59E0B;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 25px;
+        }
+        .example-box .box-title {
+            font-weight: 800;
+            color: #92400E;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        .ex-prob { font-size: 14.5px; margin-bottom: 10px; color: #1F2937; }
+        .ex-sol {
+            font-size: 14px;
+            background: white;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px dashed #FCD34D;
+            line-height: 1.7;
+        }
+
+        .practice-heading h3 {
+            font-size: 17px;
+            color: #991B1B;
+            margin-bottom: 16px;
+            font-weight: 800;
+        }
+
+        .q-card {
+            background: white;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 14px;
+            padding: 20px 22px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            transition: all 0.25s ease;
+        }
+        .q-card:hover { border-color: #94A3B8; box-shadow: 0 6px 12px rgba(0,0,0,0.06); }
+        .q-card.correct { border-color: var(--success); background: #F0FDF4; }
+        .q-card.wrong { border-color: var(--danger); background: #FEF2F2; }
+        
+        .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        .q-index {
+            background: #0F172A;
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+        .badge {
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .badge-mcq { background: #E0E7FF; color: #3730A3; }
+        .badge-tf { background: #FCE7F3; color: #9D174D; }
+        .badge-short { background: #DCFCE7; color: #166534; }
+
+        .q-prompt { font-size: 15.5px; font-weight: 600; color: #0F172A; margin-bottom: 15px; }
+
+        /* MCQ */
+        .mcq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 10px;
+        }
+        .opt-btn {
+            background: #F8FAFC;
+            border: 1.5px solid #CBD5E1;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 14.5px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .opt-btn:hover:not(:disabled) { background: #EFF6FF; border-color: #3B82F6; }
+        .opt-btn.chosen-correct { background: #DCFCE7 !important; border-color: #10B981 !important; color: #065F46 !important; font-weight: 700; }
+        .opt-btn.chosen-wrong { background: #FEE2E2 !important; border-color: #EF4444 !important; color: #991B1B !important; }
+        .opt-btn.is-answer { background: #DCFCE7 !important; border-color: #10B981 !important; font-weight: 700; }
+
+        /* TF */
+        .tf-wrap { display: flex; gap: 12px; }
+        .btn-tf {
+            padding: 10px 24px;
+            border-radius: 10px;
+            font-size: 14.5px;
+            font-weight: 700;
+            cursor: pointer;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn-dung { background: #EFF6FF; color: #1E40AF; border-color: #BFDBFE; }
+        .btn-dung:hover:not(:disabled) { background: #DBEAFE; }
+        .btn-sai { background: #FFF1F2; color: #9F1239; border-color: #FECDD3; }
+        .btn-sai:hover:not(:disabled) { background: #FFE4E6; }
+        .btn-tf.chosen-correct { background: #10B981 !important; color: white !important; }
+        .btn-tf.chosen-wrong { background: #EF4444 !important; color: white !important; }
+
+        /* Short */
+        .short-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .short-wrap label { font-size: 14.5px; font-weight: 600; color: #475569; }
+        .short-wrap input {
+            padding: 10px 14px;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 10px;
+            font-size: 15px;
+            width: 140px;
+            outline: none;
+            transition: border 0.2s;
+            font-family: inherit;
+        }
+        .short-wrap input:focus { border-color: var(--primary); }
+        .unit { font-size: 14px; font-weight: 700; color: #475569; }
+        .btn-check {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.2s;
+        }
+        .btn-check:hover { opacity: 0.9; }
+
+        /* Results & Explanation */
+        .result-msg {
+            margin-top: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            display: none;
+        }
+        .result-msg.show-correct { display: block; color: var(--success); }
+        .result-msg.show-wrong { display: block; color: var(--danger); }
+
+        .exp-box {
+            margin-top: 10px;
+            font-size: 13.5px;
+            background: #F8FAFC;
+            border-left: 4px solid #64748B;
+            padding: 10px 14px;
+            border-radius: 6px;
+            display: none;
+            color: #1E293B;
+            line-height: 1.6;
+        }
+        .exp-box.show { display: block; }
+
+        /* Modal Popup */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+        .modal-box {
+            background: white;
+            border-radius: 18px;
+            max-width: 520px;
+            width: 100%;
+            padding: 28px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes modalPop {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .modal-box h3 { font-size: 18px; font-weight: 800; margin-bottom: 12px; color: #0F172A; display: flex; align-items: center; gap: 8px; }
+        .modal-box p { font-size: 13.5px; color: #475569; margin-bottom: 16px; line-height: 1.6; }
+        .modal-input {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 10px;
+            font-size: 13.5px;
+            margin-bottom: 16px;
+            outline: none;
+            font-family: inherit;
+        }
+        .modal-input:focus { border-color: var(--primary); }
+        .modal-actions { display: flex; justify-content: flex-end; gap: 10px; }
+        .btn-modal-cancel {
+            background: #F1F5F9;
+            color: #475569;
+            border: 1px solid #CBD5E1;
+            padding: 9px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13.5px;
+            cursor: pointer;
+        }
+        .btn-modal-save {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13.5px;
+            cursor: pointer;
+        }
+
+        /* Toast */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #0F172A;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            font-size: 14px;
+            font-weight: 600;
+            display: none;
+            z-index: 9999;
+            align-items: center;
+            gap: 10px;
+            animation: slideUp 0.3s ease;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Teacher & Student Mode Bar */
+        .mode-topbar {
+            background: #0F172A;
+            color: white;
+            padding: 10px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 13px;
+            border-bottom: 2px solid #334155;
+        }
+        .mode-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .badge-mode {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .badge-teacher {
+            background: #2563EB;
+            color: white;
+        }
+        .badge-student {
+            background: #059669;
+            color: white;
+        }
+        .badge-exam-code {
+            background: #1E293B;
+            border: 1px solid #475569;
+            color: #F8FAFC;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 12.5px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .badge-exam-code b {
+            color: #FBBF24;
+            font-family: monospace;
+        }
+        .mode-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .btn-mode-act {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .btn-m-shuffle { background: #3B82F6; color: white; }
+        .btn-m-shuffle:hover { background: #2563EB; }
+        .btn-m-remix { background: #F59E0B; color: white; }
+        .btn-m-remix:hover { background: #D97706; }
+        .btn-m-assign { background: #10B981; color: white; font-weight: 800; }
+        .btn-m-assign:hover { background: #059669; }
+        .btn-m-toggle { background: #475569; color: white; }
+        .btn-m-toggle:hover { background: #334155; }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 13.5px;
+            color: var(--text-muted);
+            border-top: 1px solid #E2E8F0;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; border-radius: 0; border: none; }
+            .student-bar, .score-bar, .tabs-nav, .btn-check, footer, .genre-toolbar, #toast, .modal-overlay { display: none !important; }
+            .genre-section { display: block !important; margin-bottom: 30px; page-break-after: always; }
+            .exp-box { display: block !important; }
+        }
+    
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- MODE TOPBAR (BÀN LÀM VIỆC GIÁO VIÊN / GIAO DIỆN HỌC SINH) -->
+    <div class="mode-topbar" id="modeTopBar"></div>
+
+    <header>
+        <h1>BÀI LÀM ÔN TẬP TOÁN 6 - GIỮA KÌ I</h1>
+        <p>CHUYÊN ĐỀ BỒI DƯỠNG NẮM CHẮC KIẾN THỨC CỐT LÕI (MỖI DẠNG 10 CÂU ĐA DẠNG HÌNH THỨC)</p>
+    </header>
+
+    <!-- Student Info Bar & Google Sheets Integration -->
+    <div class="student-bar">
+        <div class="student-inputs">
+            <div class="input-group-student">
+                <label><i class="fas fa-user-graduate" style="color: var(--primary);"></i> Họ và tên:</label>
+                <input type="text" id="studentName" placeholder="Nhập họ và tên..." />
+            </div>
+            <div class="input-group-student">
+                <label><i class="fas fa-school" style="color: var(--primary);"></i> Lớp:</label>
+                <input type="text" id="studentClass" placeholder="Ví dụ: 6A1" style="width: 110px;" />
+            </div>
+        </div>
+        <div class="student-actions">
+            <button class="btn-gsheet-config" id="btnGsheetConfig" onclick="openSheetConfigModal()"><i class="fas fa-cog"></i> Cài đặt Google Sheet</button>
+            <button class="btn-submit-gsheet" onclick="submitToGoogleSheet()"><i class="fas fa-cloud-upload-alt"></i> NỘP BÀI VỀ GOOGLE SHEETS</button>
+        </div>
+    </div>
+
+    <!-- Score Bar -->
+    <div class="score-bar">
+        <div class="score-item">
+            Đã làm đúng: <span class="score-badge" id="scoreBadge">0 / 60</span>
+        </div>
+        <div class="score-bar-actions">
+            <button class="btn-top" onclick="resetAll()"><i class="fas fa-rotate-left"></i> Làm lại từ đầu</button>
+            <button class="btn-top" onclick="window.print()"><i class="fas fa-print"></i> In phiếu bài tập</button>
+        </div>
+    </div>
+
+    <!-- Tabs Nav -->
+    <div class="tabs-nav">
+        <button class="tab-btn active" data-id="g1" onclick="switchTab('g1')">Dạng 1: Tập hợp & Kí hiệu</button>
+<button class="tab-btn " data-id="g2" onclick="switchTab('g2')">Dạng 2: Phép tính & Lũy thừa</button>
+<button class="tab-btn " data-id="g3" onclick="switchTab('g3')">Dạng 3: Tính nhanh hợp lý</button>
+<button class="tab-btn " data-id="g4" onclick="switchTab('g4')">Dạng 4: Tìm số tự nhiên x</button>
+<button class="tab-btn " data-id="g5" onclick="switchTab('g5')">Dạng 5: Dấu hiệu chia hết</button>
+<button class="tab-btn " data-id="g6" onclick="switchTab('g6')">Dạng 6: Hình học trực quan</button>
+
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="main-content" id="genreContainer">
+        <!-- Render động bằng JavaScript -->
+    </div>
+
+    <footer>
+        Bản quyền chuyên môn Tổ Toán - Tin THCS • Chương trình Giáo dục Phổ thông 2018 (Hỗ trợ Trộn đề, Đổi số & Tự động lưu Google Sheets)
+    </footer>
+</div>
+
+<script>
+const rawGenresData = [{"id": "g1", "name": "Dạng 1: Tập hợp & Kí hiệu", "theory": ["Hai cách cho tập hợp: Liệt kê các phần tử {a; b; c} hoặc Chỉ ra tính chất đặc trưng.", "Kí hiệu: $a \\in A$ ($a$ thuộc $A$), $b \\notin A$ ($b$ không thuộc $A$).", "Mỗi phần tử chỉ viết ĐÚNG MỘT LẦN! Dùng dấu chấm phẩy ';' để ngăn cách."], "example": {"title": "Viết tập hợp và điền kí hiệu", "prob": "Cho tập hợp $A$ các số tự nhiên lớn hơn 3 và không vượt quá 8. Viết $A$ bằng cách liệt kê và điền kí hiệu: $3 ... A$; $5 ... A$.", "sol": "$A = \\{4; 5; 6; 7; 8\\}$. Ta có $3 \\notin A$ và $5 \\in A$."}, "questions": [{"id": "6_1_1", "type": "mcq", "q": "Cho tập hợp $A = \\{2; 3; 5; 7\\}$. Khẳng định nào sau đây là <b>đúng</b>?", "options": ["$2 \\notin A$", "$5 \\in A$", "$4 \\in A$", "$7 \\notin A$"], "ans": 1, "exp": "Số 5 có mặt trong tập hợp $A$ nên khẳng định $5 \\in A$ là đúng."}, {"id": "6_1_2", "type": "mcq", "q": "Tập hợp $M$ các số tự nhiên lớn hơn 5 và nhỏ hơn 10 được viết dưới dạng liệt kê là:", "options": ["$M = \\{6; 7; 8; 9\\}$", "$M = \\{5; 6; 7; 8; 9\\}$", "$M = \\{6; 7; 8; 9; 10\\}$", "$M = \\{5; 6; 7; 8; 9; 10\\}$"], "ans": 0, "exp": "Lớn hơn 5 và nhỏ hơn 10 thì không lấy số 5 và số 10, chỉ gồm các số: 6; 7; 8; 9."}, {"id": "6_1_3", "type": "mcq", "q": "Tập hợp các chữ cái tiếng Việt có mặt trong từ <b>\"TOAN HOC\"</b> có bao nhiêu phần tử?", "options": ["7 phần tử", "6 phần tử", "8 phần tử", "5 phần tử"], "ans": 1, "exp": "Các chữ cái là: T, O, A, N, H, C (chữ O xuất hiện 2 lần chỉ tính 1 lần). Tổng cộng có 6 phần tử."}, {"id": "6_1_4", "type": "mcq", "q": "Kí hiệu tập hợp các số tự nhiên khác 0 là:", "options": ["$\\mathbb{N}$", "$\\mathbb{N}^*$", "$\\mathbb{Z}$", "$\\mathbb{Q}$"], "ans": 1, "exp": "Tập hợp các số tự nhiên khác 0 kí hiệu là $\\mathbb{N}^* = \\{1; 2; 3; ...\\}$."}, {"id": "6_1_5", "type": "tf", "q": "Số 0 thuộc tập hợp $\\mathbb{N}^*$ ($0 \\in \\mathbb{N}^*$).", "ans": "sai", "exp": "Sai. Vì tập hợp $\\mathbb{N}^*$ chỉ gồm các số tự nhiên KHÁC 0 ($1; 2; 3;...$)."}, {"id": "6_1_6", "type": "tf", "q": "Tập hợp $B = \\{x \\in \\mathbb{N} \\mid x \\le 4\\}$ gồm có 5 phần tử.", "ans": "dung", "exp": "Đúng. Các phần tử là: 0; 1; 2; 3; 4 (có đúng 5 phần tử)."}, {"id": "6_1_7", "type": "tf", "q": "Trong cách viết tập hợp bằng liệt kê, mỗi phần tử có thể viết lặp lại 2 lần.", "ans": "sai", "exp": "Sai. Quy tắc vàng: Mỗi phần tử chỉ được viết ĐÚNG MỘT LẦN."}, {"id": "6_1_8", "type": "short", "q": "Cho tập hợp $M = \\{x \\in \\mathbb{N} \\mid 5 \\le x \\le 12\\}$. Tập hợp $M$ có bao nhiêu phần tử?", "ans": "8", "unit": "phần tử", "exp": "Các phần tử là từ 5 đến 12. Số phần tử: $12 - 5 + 1 = 8$ phần tử."}, {"id": "6_1_9", "type": "short", "q": "Số tự nhiên nhỏ nhất có hai chữ số khác nhau là số mấy?", "ans": "10", "unit": "", "exp": "Số đó là 10 (chữ số hàng chục nhỏ nhất khác 0 là 1, chữ số hàng đơn vị nhỏ nhất khác 1 là 0)."}, {"id": "6_1_10", "type": "short", "q": "Cho tập hợp $C = \\{2; 4; 6; 8; 10; 12\\}$. Hãy đếm số phần tử của tập hợp $C$:", "ans": "6", "unit": "phần tử", "exp": "Tập hợp $C$ có đúng 6 phần tử."}]}, {"id": "g2", "name": "Dạng 2: Phép tính & Lũy thừa", "theory": ["Thứ tự phép tính: Lũy thừa &rarr; Nhân / Chia &rarr; Cộng / Trừ.", "Có ngoặc: Ngoặc tròn $( )$ &rarr; Ngoặc vuông $[ ]$ &rarr; Ngoặc nhọn $\\{ \\}$.", "Công thức lũy thừa: $a^m \\cdot a^n = a^{m+n}$; $a^m : a^n = a^{m-n}$ ($a \\neq 0$).", "Cảnh báo: Tuyệt đối không nhầm $2^3 = 6$, mà $2^3 = 2 \\cdot 2 \\cdot 2 = 8$!"], "example": {"title": "Thực hiện phép tính theo thứ tự ưu tiên", "prob": "Tính giá trị: $A = 3^2 \\cdot 5 - 2^3 \\cdot 4$", "sol": "$A = 9 \\cdot 5 - 8 \\cdot 4 = 45 - 32 = 13$."}, "questions": [{"id": "6_2_1", "type": "mcq", "q": "Giá trị của lũy thừa $2^4$ là:", "options": ["8", "16", "12", "64"], "ans": 1, "exp": "$2^4 = 2 \\cdot 2 \\cdot 2 \\cdot 2 = 16$."}, {"id": "6_2_2", "type": "mcq", "q": "Kết quả của phép nhân $3^2 \\cdot 3^3$ là:", "options": ["$3^6$", "$3^5$", "$9^5$", "$9^6$"], "ans": 1, "exp": "Giữ nguyên cơ số, cộng các số mũ: $3^{2+3} = 3^5$."}, {"id": "6_2_3", "type": "mcq", "q": "Thứ tự thực hiện phép tính nào sau đây là <b>đúng</b> đối với biểu thức không có dấu ngoặc?", "options": ["Cộng, trừ &rarr; Nhân, chia &rarr; Lũy thừa", "Lũy thừa &rarr; Nhân, chia &rarr; Cộng, trừ", "Nhân, chia &rarr; Lũy thừa &rarr; Cộng, trừ", "Lũy thừa &rarr; Cộng, trừ &rarr; Nhân, chia"], "ans": 1, "exp": "Quy tắc: Lũy thừa &rarr; Nhân và chia &rarr; Cộng và trừ."}, {"id": "6_2_4", "type": "mcq", "q": "Tính: $10 + 20 : 2$. Kết quả là:", "options": ["15", "20", "25", "30"], "ans": 1, "exp": "Nhân chia trước: $20 : 2 = 10$. Sau đó cộng: $10 + 10 = 20$."}, {"id": "6_2_5", "type": "tf", "q": "Khẳng định: $2^3 = 6$ là đúng hay sai?", "ans": "sai", "exp": "Sai. Vì $2^3 = 2 \\cdot 2 \\cdot 2 = 8$, không phải lấy $2 \\cdot 3$."}, {"id": "6_2_6", "type": "tf", "q": "Với mọi số tự nhiên $a \\neq 0$ thì $a^0 = 1$.", "ans": "dung", "exp": "Đúng. Quy ước số mũ 0: $a^0 = 1$ với mọi $a \\neq 0$."}, {"id": "6_2_7", "type": "short", "q": "Tính giá trị của biểu thức: $40 - 3 \\cdot 2^3$", "ans": "16", "unit": "", "exp": "$2^3 = 8 \\Rightarrow 3 \\cdot 8 = 24$. Kết quả: $40 - 24 = 16$."}, {"id": "6_2_8", "type": "short", "q": "Tính giá trị: $2^4 \\cdot 3 - 5^2$", "ans": "23", "unit": "", "exp": "$16 \\cdot 3 - 25 = 48 - 25 = 23$."}, {"id": "6_2_9", "type": "short", "q": "Tính: $100 : 5^2 + 2 \\cdot 3^2$", "ans": "22", "unit": "", "exp": "$100 : 25 + 2 \\cdot 9 = 4 + 18 = 22$."}, {"id": "6_2_10", "type": "short", "q": "Tính kết quả: $7^5 : 7^3 + 2^2 \\cdot 2^3$", "ans": "81", "unit": "", "exp": "$7^2 + 2^5 = 49 + 32 = 81$."}]}, {"id": "g3", "name": "Dạng 3: Tính nhanh hợp lý", "theory": ["Tính chất phân phối: $a \\cdot b + a \\cdot c = a \\cdot (b + c)$.", "Hiệu hai tích: $a \\cdot b - a \\cdot c = a \\cdot (b - c)$.", "Ghép các cặp số tròn chục, tròn trăm: $25 \\cdot 4 = 100$; $125 \\cdot 8 = 1000$; $47 + 53 = 100$."], "example": {"title": "Tính nhanh bằng đặt thừa số chung", "prob": "Tính nhanh: $48 \\cdot 37 + 48 \\cdot 63$", "sol": "$= 48 \\cdot (37 + 63) = 48 \\cdot 100 = 4800$."}, "questions": [{"id": "6_3_1", "type": "mcq", "q": "Để tính nhanh biểu thức $25 \\cdot 19 \\cdot 4$, cách làm hợp lý nhất là:", "options": ["Lấy $25 \\cdot 19$ trước rồi nhân với 4", "Ghép $(25 \\cdot 4) \\cdot 19$", "Lấy $19 \\cdot 4$ trước rồi nhân với 25", "Tính từ trái sang phải"], "ans": 1, "exp": "Ghép $(25 \\cdot 4) = 100$ rồi nhân $100 \\cdot 19 = 1900$ nhanh nhất."}, {"id": "6_3_2", "type": "mcq", "q": "Biểu thức $35 \\cdot 43 + 35 \\cdot 57$ có kết quả là:", "options": ["350", "3500", "35000", "35"], "ans": 1, "exp": "$35 \\cdot (43 + 57) = 35 \\cdot 100 = 3500$."}, {"id": "6_3_3", "type": "mcq", "q": "Cặp số nào sau đây có tích bằng 1000?", "options": ["$25$ và $4$", "$125$ và $8$", "$50$ và $2$", "$20$ và $5$"], "ans": 1, "exp": "$125 \\cdot 8 = 1000$."}, {"id": "6_3_4", "type": "mcq", "q": "Tính nhanh $84 \\cdot 135 - 84 \\cdot 35$. Kết quả là:", "options": ["840", "8400", "84000", "1350"], "ans": 1, "exp": "$84 \\cdot (135 - 35) = 84 \\cdot 100 = 8400$."}, {"id": "6_3_5", "type": "tf", "q": "Tính chất giao hoán của phép nhân: $a \\cdot b = b \\cdot a$.", "ans": "dung", "exp": "Đúng. Khi đổi chỗ các thừa số trong một tích thì tích không đổi."}, {"id": "6_3_6", "type": "tf", "q": "Ta có: $27 + 145 + 73 = (27 + 73) + 145 = 100 + 145 = 245$.", "ans": "dung", "exp": "Đúng. Ghép hai số có tổng tròn trăm $27 + 73 = 100$."}, {"id": "6_3_7", "type": "short", "q": "Tính nhanh: $64 \\cdot 75 + 64 \\cdot 25$", "ans": "6400", "unit": "", "exp": "$64 \\cdot (75 + 25) = 64 \\cdot 100 = 6400$."}, {"id": "6_3_8", "type": "short", "q": "Tính nhanh: $125 \\cdot 73 \\cdot 8$", "ans": "73000", "unit": "", "exp": "$(125 \\cdot 8) \\cdot 73 = 1000 \\cdot 73 = 73000$."}, {"id": "6_3_9", "type": "short", "q": "Tính thuận tiện: $20 \\cdot 38 \\cdot 5$", "ans": "3800", "unit": "", "exp": "$(20 \\cdot 5) \\cdot 38 = 100 \\cdot 38 = 3800$."}, {"id": "6_3_10", "type": "short", "q": "Tính giá trị: $58 \\cdot 75 + 58 \\cdot 50 - 58 \\cdot 25$", "ans": "5800", "unit": "", "exp": "$58 \\cdot (75 + 50 - 25) = 58 \\cdot 100 = 5800$."}]}, {"id": "g4", "name": "Dạng 4: Tìm số tự nhiên x", "theory": ["Tìm số hạng = Tổng - Số hạng đã biết; Số trừ = Số bị trừ - Hiệu.", "Tìm thừa số = Tích : Thừa số đã biết; Số bị chia = Thương $\\times$ Số chia.", "Dạng có ngoặc: Coi cả cụm trong ngoặc như một chữ cái lớn $X$, giải tìm cụm đó trước!", "Dạng lũy thừa: Đưa về cùng cơ số: $a^x = a^n \\Rightarrow x = n$."], "example": {"title": "Tìm x có ngoặc và lũy thừa", "prob": "Tìm $x$, biết: a) $2(x - 3) = 16$; b) $2^x = 32$", "sol": "a) $x - 3 = 16 : 2 = 8 \\Rightarrow x = 8 + 3 = 11$.<br>b) $32 = 2^5 \\Rightarrow x = 5$."}, "questions": [{"id": "6_4_1", "type": "mcq", "q": "Tìm $x$, biết: $x + 25 = 70$. Giá trị của $x$ là:", "options": ["95", "45", "55", "35"], "ans": 1, "exp": "$x = 70 - 25 = 45$."}, {"id": "6_4_2", "type": "mcq", "q": "Tìm $x$, biết: $50 - x = 18$. Giá trị của $x$ là:", "options": ["68", "32", "22", "42"], "ans": 1, "exp": "$x = 50 - 18 = 32$."}, {"id": "6_4_3", "type": "mcq", "q": "Tìm $x$, biết: $3 \\cdot x = 72$. Giá trị của $x$ là:", "options": ["24", "21", "26", "18"], "ans": 0, "exp": "$x = 72 : 3 = 24$."}, {"id": "6_4_4", "type": "mcq", "q": "Tìm $x$, biết: $2^x = 16$. Giá trị của $x$ là:", "options": ["2", "3", "4", "5"], "ans": 2, "exp": "Vì $16 = 2^4$ nên $x = 4$."}, {"id": "6_4_5", "type": "tf", "q": "Trong phép toán $x - 34 = 26$, muốn tìm số bị trừ $x$ ta lấy $26 + 34$.", "ans": "dung", "exp": "Đúng. Muốn tìm số bị trừ ta lấy hiệu cộng với số trừ ($x = 26 + 34 = 60$)."}, {"id": "6_4_6", "type": "tf", "q": "Nếu $3^x = 27$ thì $x = 9$.", "ans": "sai", "exp": "Sai. Vì $27 = 3^3$ nên $x = 3$ (chứ không phải lấy $27 : 3$)."}, {"id": "6_4_7", "type": "short", "q": "Tìm số tự nhiên $x$, biết: $2x + 10 = 40$", "ans": "15", "unit": "", "exp": "$2x = 40 - 10 = 30 \\Rightarrow x = 30 : 2 = 15$."}, {"id": "6_4_8", "type": "short", "q": "Tìm $x$, biết: $4 \\cdot (x - 5) = 28$", "ans": "12", "unit": "", "exp": "$x - 5 = 28 : 4 = 7 \\Rightarrow x = 7 + 5 = 12$."}, {"id": "6_4_9", "type": "short", "q": "Tìm $x$, biết: $5^x = 125$", "ans": "3", "unit": "", "exp": "$125 = 5^3 \\Rightarrow x = 3$."}, {"id": "6_4_10", "type": "short", "q": "Tìm $x$, biết: $2^{x+1} = 16$", "ans": "3", "unit": "", "exp": "$2^{x+1} = 2^4 \\Rightarrow x + 1 = 4 \\Rightarrow x = 3$."}]}, {"id": "g5", "name": "Dạng 5: Dấu hiệu chia hết", "theory": ["Chia hết cho 2: Tận cùng chẵn (0, 2, 4, 6, 8).", "Chia hết cho 5: Tận cùng 0 hoặc 5. (Chia hết cho cả 2 và 5 tận cùng là 0).", "Chia hết cho 3: Tổng các chữ số chia hết cho 3.", "Chia hết cho 9: Tổng các chữ số chia hết cho 9. (Chia hết cho 9 thì chắc chắn chia hết cho 3!)."], "example": {"title": "Nhận biết dấu hiệu chia hết", "prob": "Tìm chữ số $*$ để $\\overline{47*}$ chia hết cho 9.", "sol": "Tổng: $4 + 7 + * = 11 + *$. Để chia hết cho 9 thì $11 + * = 18 \\Rightarrow * = 7$."}, "questions": [{"id": "6_5_1", "type": "mcq", "q": "Số nào sau đây chia hết cho cả 2 và 5?", "options": ["125", "230", "344", "415"], "ans": 1, "exp": "Số chia hết cho cả 2 và 5 phải có chữ số tận cùng là 0. Đó là số 230."}, {"id": "6_5_2", "type": "mcq", "q": "Trong các số sau, số nào chia hết cho 3 nhưng không chia hết cho 9?", "options": ["123", "729", "405", "180"], "ans": 0, "exp": "Số 123 có tổng chữ số là $1+2+3=6$ chia hết cho 3 nhưng 6 không chia hết cho 9."}, {"id": "6_5_3", "type": "mcq", "q": "Một số có chữ số tận cùng là 5 thì số đó chắc chắn chia hết cho:", "options": ["2", "3", "5", "9"], "ans": 2, "exp": "Dấu hiệu chia hết cho 5: Chữ số tận cùng là 0 hoặc 5."}, {"id": "6_5_4", "type": "mcq", "q": "Tổng $A = 120 + 36$ chia hết cho những số nào sau đây?", "options": ["Chỉ chia hết cho 2", "Chỉ chia hết cho 3", "Chia hết cho cả 2 và 3", "Không chia hết cho số nào"], "ans": 2, "exp": "120 và 36 đều chia hết cho 2 và chia hết cho 3 nên tổng chia hết cho cả 2 và 3."}, {"id": "6_5_5", "type": "tf", "q": "Mọi số chia hết cho 9 thì đều chia hết cho 3.", "ans": "dung", "exp": "Đúng. Vì 9 chia hết cho 3 nên số nào chia hết cho 9 cũng chia hết cho 3."}, {"id": "6_5_6", "type": "tf", "q": "Số có chữ số tận cùng là 3 thì chia hết cho 3.", "ans": "sai", "exp": "Sai. Dấu hiệu chia hết cho 3 phụ thuộc vào TỔNG CÁC CHỮ SỐ, ví dụ số 13, 23 có tận cùng 3 nhưng không chia hết cho 3."}, {"id": "6_5_7", "type": "short", "q": "Điền một chữ số vào dấu $*$ để số $\\overline{18*}$ chia hết cho cả 2 và 5:", "ans": "0", "unit": "", "exp": "Để chia hết cho cả 2 và 5 thì tận cùng phải là 0, do đó $* = 0$."}, {"id": "6_5_8", "type": "short", "q": "Tìm chữ số $*$ nhỏ nhất để số $\\overline{2*5}$ chia hết cho 3:", "ans": "2", "unit": "", "exp": "Tổng chữ số: $2 + * + 5 = 7 + *$. Nhỏ nhất để chia hết cho 3 là $7 + 2 = 9 \\Rightarrow * = 2$."}, {"id": "6_5_9", "type": "short", "q": "Trong các số: 124; 355; 420; 513; 682, có bao nhiêu số chia hết cho 2?", "ans": "3", "unit": "số", "exp": "Có 3 số tận cùng chẵn là: 124; 420; 682."}, {"id": "6_5_10", "type": "short", "q": "Tìm chữ số $*$ để số $\\overline{47*}$ chia hết cho 9:", "ans": "7", "unit": "", "exp": "Tổng: $4 + 7 + * = 11 + * = 18 \\Rightarrow * = 7$."}]}, {"id": "g6", "name": "Dạng 6: Hình học trực quan", "theory": ["Tam giác đều: 3 cạnh bằng nhau, 3 góc bằng nhau và bằng $60^\\circ$.", "Hình vuông cạnh $a$: Chu vi $P = 4a$, Diện tích $S = a^2$.", "Hình chữ nhật dài $a$, rộng $b$: Chu vi $P = (a + b) \\cdot 2$, Diện tích $S = a \\cdot b$.", "Hình thoi hai đường chéo $m, n$: Diện tích $S = \\frac{1}{2} m \\cdot n$."], "example": {"title": "Tính chu vi và diện tích hình chữ nhật", "prob": "Một mảnh vườn hình chữ nhật dài 20m, rộng 12m. Tính chu vi và diện tích.", "sol": "Chu vi: $(20 + 12) \\cdot 2 = 64\\text{ m}$. Diện tích: $20 \\cdot 12 = 240\\text{ m}^2$."}, "questions": [{"id": "6_6_1", "type": "mcq", "q": "Tam giác đều có mỗi góc bằng bao nhiêu độ?", "options": ["$45^\\circ$", "$60^\\circ$", "$90^\\circ$", "$120^\\circ$"], "ans": 1, "exp": "Tam giác đều có 3 góc bằng nhau và mỗi góc bằng $60^\\circ$."}, {"id": "6_6_2", "type": "mcq", "q": "Công thức tính diện tích hình vuông cạnh $a$ là:", "options": ["$S = 4a$", "$S = a^2$", "$S = 2a$", "$S = a^3$"], "ans": 1, "exp": "Diện tích hình vuông: $S = a \\cdot a = a^2$."}, {"id": "6_6_3", "type": "mcq", "q": "Hình thoi có độ dài hai đường chéo là $m$ và $n$. Công thức tính diện tích là:", "options": ["$S = m \\cdot n$", "$S = \\frac{1}{2} m \\cdot n$", "$S = 2(m + n)$", "$S = (m + n) \\cdot 2$"], "ans": 1, "exp": "Diện tích hình thoi bằng nửa tích hai đường chéo: $S = \\frac{1}{2} m \\cdot n$."}, {"id": "6_6_4", "type": "mcq", "q": "Một mảnh vườn hình chữ nhật có chiều dài 15m và chiều rộng 8m. Chu vi của mảnh vườn là:", "options": ["$23\\text{ m}$", "$46\\text{ m}$", "$120\\text{ m}$", "$60\\text{ m}$"], "ans": 1, "exp": "Chu vi: $P = (15 + 8) \\cdot 2 = 23 \\cdot 2 = 46\\text{ m}$."}, {"id": "6_6_5", "type": "tf", "q": "Hình thoi có bốn cạnh bằng nhau.", "ans": "dung", "exp": "Đúng. Định nghĩa hình thoi: Là tứ giác có bốn cạnh bằng nhau."}, {"id": "6_6_6", "type": "tf", "q": "Hình bình hành có hai đường chéo bằng nhau.", "ans": "sai", "exp": "Sai. Hình bình hành hai đường chéo chỉ cắt nhau tại trung điểm, hai đường chéo bằng nhau là hình chữ nhật hoặc hình thang cân."}, {"id": "6_6_7", "type": "short", "q": "Một mảnh đất hình vuông có cạnh 15m. Tính diện tích mảnh đất (đơn vị $m^2$):", "ans": "225", "unit": "m²", "exp": "$S = 15 \\cdot 15 = 225\\text{ m}^2$."}, {"id": "6_6_8", "type": "short", "q": "Một sân bóng đá mini hình chữ nhật có chiều dài 30m và chiều rộng 20m. Chu vi sân bóng là bao nhiêu mét?", "ans": "100", "unit": "m", "exp": "$P = (30 + 20) \\cdot 2 = 50 \\cdot 2 = 100\\text{ m}$."}, {"id": "6_6_9", "type": "short", "q": "Diện tích của sân bóng đá mini ở câu trên bằng bao nhiêu $m^2$?", "ans": "600", "unit": "m²", "exp": "$S = 30 \\cdot 20 = 600\\text{ m}^2$."}, {"id": "6_6_10", "type": "short", "q": "Một hình thoi có độ dài hai đường chéo lần lượt là 12cm và 16cm. Tính diện tích hình thoi (đơn vị $cm^2$):", "ans": "96", "unit": "cm²", "exp": "$S = \\frac{1}{2} \\cdot 12 \\cdot 16 = 96\\text{ cm}^2$."}]}];
+
+function applyRemixLogic(genre) {
+    if (genre.id === 'g1') {
+        const low = Math.floor(Math.random() * 4) + 2;
+        const high = low + Math.floor(Math.random() * 5) + 5;
+        const count = high - low + 1;
+        const qShort = genre.questions.find(q => q.id === '6_1_8');
+        if (qShort) {
+            qShort.q = `Cho tập hợp $M = \\{x \\in \\mathbb{N} \\mid ${low} \\le x \\le ${high}\\}$. Tập hợp $M$ có bao nhiêu phần tử?`;
+            qShort.ans = count.toString();
+            qShort.exp = `Các phần tử từ ${low} đến ${high}. Số phần tử là: ${high} - ${low} + 1 = ${count} phần tử.`;
+        }
+    } else if (genre.id === 'g2') {
+        const a = Math.floor(Math.random() * 3) + 2;
+        const b = Math.floor(Math.random() * 4) + 3;
+        const val = Math.pow(a, 2) * b;
+        const qShort = genre.questions.find(q => q.id === '6_2_7');
+        if (qShort) {
+            const sub = Math.floor(Math.random() * 10) + 10;
+            const res = sub + val;
+            qShort.q = `Tính giá trị của biểu thức: $${res} - ${b} \\cdot ${a}^2$`;
+            qShort.ans = sub.toString();
+            qShort.exp = `Ta có $${a}^2 = ${a*a} \\Rightarrow ${b} \\cdot ${a*a} = ${val}$. Kết quả: $${res} - ${val} = ${sub}$.`;
+        }
+    } else if (genre.id === 'g3') {
+        const a = Math.floor(Math.random() * 40) + 20;
+        const b = Math.floor(Math.random() * 50) + 25;
+        const c = 100 - b;
+        const ans = a * 100;
+        const qShort = genre.questions.find(q => q.id === '6_3_7');
+        if (qShort) {
+            qShort.q = `Tính nhanh: $${a} \\cdot ${b} + ${a} \\cdot ${c}$`;
+            qShort.ans = ans.toString();
+            qShort.exp = `$${a} \\cdot (${b} + ${c}) = ${a} \\cdot 100 = ${ans}$.`;
+        }
+    } else if (genre.id === 'g4') {
+        const xVal = Math.floor(Math.random() * 30) + 10;
+        const plusVal = Math.floor(Math.random() * 25) + 15;
+        const qShort = genre.questions.find(q => q.id === '6_4_7');
+        if (qShort) {
+            qShort.q = `Tìm số tự nhiên $x$, biết: $2x + ${plusVal} = ${xVal*2 + plusVal}$`;
+            qShort.ans = xVal.toString();
+            qShort.exp = `$2x = ${xVal*2 + plusVal} - ${plusVal} = ${xVal*2} \\Rightarrow x = ${xVal*2} : 2 = ${xVal}$.`;
+        }
+    } else if (genre.id === 'g5') {
+        const qShort = genre.questions.find(q => q.id === '6_5_10');
+        if (qShort) {
+            const d1 = Math.floor(Math.random() * 5) + 2;
+            const d2 = Math.floor(Math.random() * 3) + 1;
+            let target = (d1 + d2 < 9) ? 9 : 18;
+            let star = target - (d1 + d2);
+            qShort.q = `Tìm chữ số $*$ để số $\\overline{${d1}${d2}*}$ chia hết cho 9:`;
+            qShort.ans = star.toString();
+            qShort.exp = `Tổng các chữ số: $${d1} + ${d2} + * = ${d1+d2} + * = ${target} \\Rightarrow * = ${star}$.`;
+        }
+    } else if (genre.id === 'g6') {
+        const side = Math.floor(Math.random() * 15) + 10;
+        const area = side * side;
+        const qShort = genre.questions.find(q => q.id === '6_6_7');
+        if (qShort) {
+            qShort.q = `Một mảnh đất hình vuông có cạnh ${side}m. Tính diện tích mảnh đất (đơn vị $m^2$):`;
+            qShort.ans = area.toString();
+            qShort.exp = `$S = ${side} \\cdot ${side} = ${area}\\text{ m}^2$.`;
+        }
+    }
+}
+
+</script>
+
+
+<div id="toast"><i class="fas fa-bell" style="color: #F59E0B;"></i> <span id="toastMsg"></span></div>
+
+<!-- Modal Cài đặt Google Sheet -->
+<div class="modal-overlay" id="gsheetModal">
+    <div class="modal-box">
+        <div style="display:inline-flex; align-items:center; gap:6px; background:#DCFCE7; color:#166534; font-size:12px; font-weight:700; padding:4px 12px; border-radius:15px; margin-bottom:12px;">
+            <i class="fas fa-check-circle"></i> Trạng thái: ĐÃ KÍCH HOẠT SẴN SÀNG
+        </div>
+        <h3><i class="fas fa-file-excel" style="color: #059669;"></i> Kết nối Google Sheets của Thầy/Cô</h3>
+        <p>Hệ thống đã tự động kích hoạt đường link <b>URL Google Apps Script</b> để nhận bài làm trực tiếp từ học sinh:</p>
+        <input type="text" class="modal-input" id="webhookUrlInput" placeholder="https://script.google.com/macros/s/.../exec" value="https://script.google.com/macros/s/AKfycbyZMrBQFoH83-P8JWnhNm145z4-wKJVlqxMdT5fFomkEE51V3adu_lObQuscoCXv-Ao/exec" />
+        <div style="font-size: 12.5px; color: #64748B; margin-bottom: 16px;">
+            <i class="fas fa-info-circle"></i> Điểm số, thời gian, tên và lớp của học sinh sẽ tự động cập nhật vào Bảng tính theo thời gian thực (GMT+7).
+        </div>
+        <div class="modal-actions">
+            <button class="btn-modal-cancel" onclick="closeSheetConfigModal()">Đóng</button>
+            <button class="btn-modal-save" onclick="saveSheetUrl()">Lưu thay đổi</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Giao bài cho Học sinh -->
+<div class="modal-overlay" id="assignModal">
+    <div class="modal-box" style="max-width: 580px;">
+        <div style="display:inline-flex; align-items:center; gap:6px; background:#DCFCE7; color:#166534; font-size:12px; font-weight:700; padding:4px 12px; border-radius:15px; margin-bottom:12px;">
+            <i class="fas fa-check-circle"></i> ĐÃ TRỘN ĐỀ XONG • SẴN SÀNG GIAO BÀI
+        </div>
+        <h3 style="color:#0F172A; font-size:18px; margin-bottom:8px;"><i class="fas fa-paper-plane" style="color: #10B981;"></i> Giao bài cho Học sinh</h3>
+        <p style="font-size:13.5px; color:#475569; margin-bottom:15px;">Thầy/Cô đã xáo trộn đề thành công (<b id="assignExamCodeText" style="color:#D97706;">MÃ ĐỀ</b>). Chọn cách giao bài cho học sinh dưới đây:</p>
+        
+        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px; margin-bottom:14px; text-align:left;">
+            <div style="font-size:13px; font-weight:700; color:#1E293B; margin-bottom:6px;"><i class="fas fa-link" style="color:#2563EB;"></i> 1. Sao chép đường link giao bài (học sinh mở là làm bài ngay):</div>
+            <div style="display:flex; gap:8px;">
+                <input type="text" id="assignLinkInput" readonly style="flex:1; padding:8px 10px; font-size:12.5px; border:1px solid #CBD5E1; border-radius:6px; font-family:monospace; background:white;" />
+                <button onclick="copyAssignLink()" style="background:#2563EB; color:white; border:none; border-radius:6px; padding:0 14px; font-size:12.5px; font-weight:700; cursor:pointer;"><i class="fas fa-copy"></i> Chép link</button>
+            </div>
+            <div style="font-size:11.5px; color:#64748B; margin-top:5px;">Học sinh mở link này sẽ làm bài đúng mã đề trên và <b>không thể tự ý trộn câu hỏi</b>!</div>
+        </div>
+
+        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:14px; margin-bottom:18px; text-align:left;">
+            <div style="font-size:13px; font-weight:700; color:#1E293B; margin-bottom:6px;"><i class="fas fa-file-download" style="color:#059669;"></i> 2. Tải file HTML giao bài (Gửi qua Zalo / Classroom / Offline):</div>
+            <button onclick="downloadStudentHtmlFile()" style="background:#059669; color:white; border:none; border-radius:6px; padding:9px 16px; font-size:13px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:8px;">
+                <i class="fas fa-download"></i> Tải file .html bài làm cho học sinh
+            </button>
+            <div style="font-size:11.5px; color:#64748B; margin-top:5px;">File này đã được chốt cứng thứ tự câu hỏi và khoá hoàn toàn các nút trộn của giáo viên.</div>
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn-modal-cancel" onclick="closeAssignModal()">Đóng</button>
+            <button onclick="switchToStudentView()" style="background:#10B981; color:white; border:none; padding:9px 18px; border-radius:8px; font-weight:700; font-size:13.5px; cursor:pointer;"><i class="fas fa-user-graduate"></i> Mở xem thử giao diện Học sinh</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const currentGrade = 6;
+const urlParams = new URLSearchParams(window.location.search);
+// Mặc định là Chế độ Học sinh (an toàn tuyệt đối), chỉ kích hoạt Bàn Giáo viên khi có mode=teacher
+let isTeacherMode = false;
+let currentExamCode = urlParams.get('code') || localStorage.getItem('thcs_exam_code_' + currentGrade) || ("MÃ ĐỀ " + currentGrade + "01");
+let activeGenreId = 'g1';
+let currentGenresData = JSON.parse(JSON.stringify(rawGenresData));
+const answeredMap = {};
+
+function renderModeTopBar() {
+    const bar = document.getElementById('modeTopBar');
+    if (!bar) return;
+    if (isTeacherMode) {
+        bar.style.background = '#0F172A';
+        bar.style.borderColor = '#334155';
+        bar.innerHTML = `
+            <div class="mode-info">
+                <span class="badge-mode badge-teacher"><i class="fas fa-chalkboard-teacher"></i> BÀN LÀM VIỆC CỦA GIÁO VIÊN</span>
+                <span class="badge-exam-code"><i class="fas fa-qrcode"></i> <b>${currentExamCode}</b></span>
+                <span style="color: #94A3B8; font-size: 12px;">(Thầy/Cô trộn đề xong nhấn "Giao bài cho học sinh")</span>
+            </div>
+            <div class="mode-actions">
+                <button class="btn-mode-act btn-m-shuffle" onclick="teacherShuffleAll()"><i class="fas fa-random"></i> Trộn câu hỏi (Sinh đề mới)</button>
+                <button class="btn-mode-act btn-m-remix" onclick="teacherRemixAll()"><i class="fas fa-dice"></i> Đổi số liệu (Remix)</button>
+                <button class="btn-mode-act btn-m-assign" onclick="teacherAssignModal()"><i class="fas fa-paper-plane"></i> GIAO BÀI CHO HỌC SINH</button>
+                <button class="btn-mode-act btn-m-toggle" onclick="toggleModePreview()"><i class="fas fa-eye"></i> Xem dạng Học sinh</button>
+            </div>
+        `;
+    } else {
+        bar.style.background = '#064E3B';
+        bar.style.borderColor = '#059669';
+        bar.innerHTML = `
+            <div class="mode-info">
+                <span class="badge-mode badge-student"><i class="fas fa-user-graduate"></i> BÀI LÀM CỦA HỌC SINH</span>
+                <span class="badge-exam-code"><i class="fas fa-qrcode"></i> <b>${currentExamCode}</b></span>
+                <span style="color: #6EE7B7; font-size: 12.5px;"><i class="fas fa-check-circle"></i> Đề thi chính thức do Giáo viên giao</span>
+            </div>
+            <div class="mode-actions">
+                <span style="font-size: 12.5px; color: #D1FAE5; font-weight:600;"><i class="fas fa-pen-nib"></i> Nhập Họ tên, Lớp, làm bài và nhấn Nộp bài</span>
+            </div>
+        `;
+    }
+
+    // Khi ở Chế độ Học sinh: Ẩn nút Cài đặt Google Sheet và các nút in/làm lại từ đầu
+    const cfgBtn = document.getElementById('btnGsheetConfig');
+    if (cfgBtn) cfgBtn.style.display = isTeacherMode ? 'inline-flex' : 'none';
+
+    const scoreActions = document.querySelector('.score-bar-actions');
+    if (scoreActions) scoreActions.style.display = isTeacherMode ? 'flex' : 'none';
+}
+
+function teacherShuffleAll() {
+    const randNum = Math.floor(Math.random() * 90) + 10;
+    currentExamCode = "MÃ ĐỀ " + currentGrade + randNum;
+    localStorage.setItem('thcs_exam_code_' + currentGrade, currentExamCode);
+    
+    currentGenresData.forEach(genre => {
+        for (let i = genre.questions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [genre.questions[i], genre.questions[j]] = [genre.questions[j], genre.questions[i]];
+        }
+        genre.questions.forEach(q => {
+            if (q.type === 'mcq' && q.options) {
+                const correctText = q.options[q.ans];
+                for (let i = q.options.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [q.options[i], q.options[j]] = [q.options[j], q.options[i]];
+                }
+                q.ans = q.options.indexOf(correctText);
+            }
+        });
+    });
+    
+    for (let k in answeredMap) delete answeredMap[k];
+    renderModeTopBar();
+    renderActiveGenre();
+    updateScore();
+    showToast("🎉 Đã trộn toàn bộ câu hỏi đề Toán " + currentGrade + "! " + currentExamCode);
+}
+
+function teacherRemixAll() {
+    currentGenresData.forEach(genre => {
+        if (typeof applyRemixLogic === 'function') {
+            applyRemixLogic(genre);
+        }
+    });
+    for (let k in answeredMap) delete answeredMap[k];
+    renderModeTopBar();
+    renderActiveGenre();
+    updateScore();
+    showToast("🎲 Đã đổi toàn bộ số liệu bài toán đề Toán " + currentGrade + "!");
+}
+
+function teacherAssignModal() {
+    document.getElementById('assignExamCodeText').innerText = currentExamCode;
+    const url = new URL(window.location.href);
+    url.searchParams.set('mode', 'student');
+    url.searchParams.set('code', currentExamCode);
+    document.getElementById('assignLinkInput').value = url.href;
+    document.getElementById('assignModal').style.display = 'flex';
+}
+
+function closeAssignModal() {
+    document.getElementById('assignModal').style.display = 'none';
+}
+
+function copyAssignLink() {
+    const input = document.getElementById('assignLinkInput');
+    input.select();
+    navigator.clipboard.writeText(input.value).then(() => {
+        showToast("Đã chép link giao bài cho học sinh!");
+    }).catch(() => {
+        prompt("Sao chép link này để gửi học sinh:", input.value);
+    });
+}
+
+function switchToStudentView() {
+    closeAssignModal();
+    isTeacherMode = false;
+    renderModeTopBar();
+    renderActiveGenre();
+    showToast("Đang ở Chế độ Học sinh (Nút trộn đề đã bị ẩn)!");
+}
+
+function toggleModePreview() {
+    isTeacherMode = !isTeacherMode;
+    renderModeTopBar();
+    renderActiveGenre();
+    if (isTeacherMode) {
+        showToast("Đã mở Bàn làm việc Giáo viên!");
+    } else {
+        showToast("Đã chuyển sang Giao diện Học sinh làm bài (Nút trộn bị ẩn)!");
+    }
+}
+
+function downloadStudentHtmlFile() {
+    let fullHtml = document.documentElement.outerHTML;
+    fullHtml = fullHtml.replace(/let isTeacherMode = true;/g, "let isTeacherMode = false;");
+    const jsonStr = JSON.stringify(currentGenresData);
+    fullHtml = fullHtml.replace(/const rawGenresData = \[.*?\];/s, "const rawGenresData = " + jsonStr + ";");
+    
+    const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = "DE_ON_TAP_TOAN_" + currentGrade + "_" + currentExamCode.replace(/\s+/g, '_') + "_GIAO_HOC_SINH.html";
+    a.click();
+    showToast("Đã tải file bài làm giao học sinh thành công!");
+}
+
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    document.getElementById('toastMsg').innerText = msg;
+    toast.style.display = 'flex';
+    setTimeout(() => { toast.style.display = 'none'; }, 3000);
+}
+
+function updateScore() {
+    const correctCount = Object.values(answeredMap).filter(v => v === true).length;
+    let totalQuestions = 0;
+    currentGenresData.forEach(g => totalQuestions += g.questions.length);
+    document.getElementById('scoreBadge').innerText = correctCount + ' / ' + totalQuestions;
+}
+
+function switchTab(genreId) {
+    activeGenreId = genreId;
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        if (btn.getAttribute('data-id') === genreId) btn.classList.add('active');
+    });
+    renderActiveGenre();
+}
+
+function safeTypeset() {
+    if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
+        try {
+            MathJax.typesetPromise().catch(() => {});
+        } catch(e) {}
+    }
+}
+
+function renderActiveGenre() {
+    const container = document.getElementById('genreContainer');
+    const genre = currentGenresData.find(g => g.id === activeGenreId);
+    if (!genre) return;
+
+    let theoryItems = genre.theory.map(t => '<li>' + t + '</li>').join('');
+    
+    let qCards = '';
+    genre.questions.forEach((q, qIdx) => {
+        const qNum = qIdx + 1;
+        let typeTag = '';
+        let actionHtml = '';
+
+        if (q.type === 'mcq') {
+            typeTag = '<span class="badge badge-mcq"><i class="fas fa-list-ul"></i> Trắc nghiệm 4 lựa chọn</span>';
+            const labels = ['A', 'B', 'C', 'D'];
+            let opts = q.options.map((opt, oI) => `
+                <button class="opt-btn" id="btn_${q.id}_${oI}" onclick="checkMCQ('${q.id}', ${oI}, ${q.ans})">
+                    <b>${labels[oI]}.</b> ${opt}
+                </button>
+            `).join('');
+            actionHtml = `<div class="mcq-grid">${opts}</div>`;
+        } else if (q.type === 'tf') {
+            typeTag = '<span class="badge badge-tf"><i class="fas fa-check-double"></i> Đúng hay Sai?</span>';
+            actionHtml = `
+                <div class="tf-wrap">
+                    <button class="btn-tf btn-dung" id="btn_${q.id}_dung" onclick="checkTF('${q.id}', 'dung', '${q.ans}')"><i class="fas fa-check"></i> ĐÚNG</button>
+                    <button class="btn-tf btn-sai" id="btn_${q.id}_sai" onclick="checkTF('${q.id}', 'sai', '${q.ans}')"><i class="fas fa-times"></i> SAI</button>
+                </div>
+            `;
+        } else if (q.type === 'short') {
+            typeTag = '<span class="badge badge-short"><i class="fas fa-pen-nib"></i> Điền kết quả</span>';
+            const unitStr = q.unit ? `<span class="unit">${q.unit}</span>` : '';
+            actionHtml = `
+                <div class="short-wrap">
+                    <label>Đáp số:</label>
+                    <input type="text" id="input_${q.id}" placeholder="Nhập số..." onkeydown="if(event.key==='Enter') checkShort('${q.id}', '${q.ans}')" />
+                    ${unitStr}
+                    <button class="btn-check" onclick="checkShort('${q.id}', '${q.ans}')"><i class="fas fa-paper-plane"></i> Kiểm tra</button>
+                </div>
+            `;
+        }
+
+        qCards += `
+            <div class="q-card" id="card_${q.id}">
+                <div class="q-header">
+                    <span class="q-index">Câu ${qNum}</span>
+                    ${typeTag}
+                </div>
+                <div class="q-prompt">${q.q}</div>
+                <div class="q-actions">${actionHtml}</div>
+                <div class="result-msg" id="res_${q.id}"></div>
+                <div class="exp-box" id="exp_${q.id}">
+                    <i class="fas fa-lightbulb"></i> <b>Giải thích chi tiết:</b> ${q.exp}
+                </div>
+            </div>
+        `;
+    });
+
+    let toolbarHtml = '';
+    if (isTeacherMode) {
+        toolbarHtml = `
+            <div class="genre-toolbar">
+                <div class="toolbar-title"><i class="fas fa-sliders-h" style="color:var(--primary);"></i> Công cụ Giáo viên (Dạng bài này):</div>
+                <div class="toolbar-actions">
+                    <button class="tool-btn btn-shuffle" onclick="shuffleGenre('${genre.id}')"><i class="fas fa-random"></i> Trộn câu hỏi dạng này</button>
+                    <button class="tool-btn btn-remix" onclick="remixGenre('${genre.id}')"><i class="fas fa-dice"></i> Đổi số liệu dạng này</button>
+                    <button class="tool-btn btn-reset-genre" onclick="resetGenre('${genre.id}')"><i class="fas fa-undo"></i> Làm lại</button>
+                </div>
+            </div>
+        `;
+    } else {
+        toolbarHtml = `
+            <div class="genre-toolbar" style="background: #F0FDF4; border: 1.5px solid #86EFAC;">
+                <div class="toolbar-title" style="color: #166534;"><i class="fas fa-tasks"></i> Câu hỏi tự luyện • <span style="font-weight:800; color:#059669;">${currentExamCode}</span> • Em hãy chọn đáp án cho từng câu hỏi bên dưới</div>
+            </div>
+        `;
+    }
+
+    container.innerHTML = `
+        <div class="genre-section active">
+            <div class="genre-header-box">
+                <h2>${genre.name} <span class="genre-count">(${genre.questions.length} câu hỏi)</span></h2>
+            </div>
+            
+            ${toolbarHtml}
+
+            <div class="theory-box">
+                <div class="box-title"><i class="fas fa-bookmark"></i> 📌 PHƯƠNG PHÁP GIẢI & MẸO GHI NHỚ BỎ TÚI</div>
+                <ul>${theoryItems}</ul>
+            </div>
+            
+            <div class="example-box">
+                <div class="box-title"><i class="fas fa-star"></i> ★ BÀI TOÁN MẪU: ${genre.example.title}</div>
+                <div class="ex-prob"><b>Đề bài:</b> ${genre.example.prob}</div>
+                <div class="ex-sol"><b>Lời giải mẫu mực từng bước:</b><br>${genre.example.sol}</div>
+            </div>
+            
+            <div class="practice-heading">
+                <h3>✍ HỆ THỐNG CÂU HỎI TỰ LUYỆN ĐA DẠNG HÌNH THỨC:</h3>
+            </div>
+            <div class="questions-container">
+                ${qCards}
+            </div>
+        </div>
+    `;
+
+    safeTypeset();
+}
+
+// 1. TRỘN CÂU HỎI & PHƯƠNG ÁN (Fisher-Yates Shuffle)
+function shuffleGenre(genreId) {
+    const genre = currentGenresData.find(g => g.id === genreId);
+    if (!genre) return;
+
+    genre.questions.forEach(q => delete answeredMap[q.id]);
+
+    for (let i = genre.questions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [genre.questions[i], genre.questions[j]] = [genre.questions[j], genre.questions[i]];
+    }
+
+    genre.questions.forEach(q => {
+        if (q.type === 'mcq' && q.options) {
+            const correctText = q.options[q.ans];
+            for (let i = q.options.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [q.options[i], q.options[j]] = [q.options[j], q.options[i]];
+            }
+            q.ans = q.options.indexOf(correctText);
+        }
+    });
+
+    renderActiveGenre();
+    updateScore();
+    showToast("🔀 Đã xáo trộn ngẫu nhiên thứ tự câu hỏi và phương án A, B, C, D!");
+}
+
+// 2. SINH SỐ LIỆU MỚI / REMIX CÂU HỎI
+function remixGenre(genreId) {
+    const genre = currentGenresData.find(g => g.id === genreId);
+    if (!genre) return;
+
+    genre.questions.forEach(q => delete answeredMap[q.id]);
+
+    if (typeof applyRemixLogic === 'function') {
+        applyRemixLogic(genre);
+    }
+
+    renderActiveGenre();
+    updateScore();
+    showToast("🎲 Đã đổi số liệu mới thành công! Mời em luyện tập tiếp.");
+}
+
+// 3. LÀM LẠI DẠNG NÀY
+function resetGenre(genreId) {
+    const origGenre = rawGenresData.find(g => g.id === genreId);
+    const targetIdx = currentGenresData.findIndex(g => g.id === genreId);
+    if (origGenre && targetIdx !== -1) {
+        origGenre.questions.forEach(q => delete answeredMap[q.id]);
+        currentGenresData[targetIdx] = JSON.parse(JSON.stringify(origGenre));
+        renderActiveGenre();
+        updateScore();
+        showToast("🔄 Đã đặt lại trạng thái ban đầu của dạng bài này!");
+    }
+}
+
+// CHẤM MCQ
+function checkMCQ(qId, chosenIdx, correctIdx) {
+    const card = document.getElementById('card_' + qId);
+    const resMsg = document.getElementById('res_' + qId);
+    const expBox = document.getElementById('exp_' + qId);
+    
+    card.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
+    
+    const chosenBtn = document.getElementById('btn_' + qId + '_' + chosenIdx);
+    const correctBtn = document.getElementById('btn_' + qId + '_' + correctIdx);
+    
+    if (chosenIdx === correctIdx) {
+        chosenBtn.classList.add('chosen-correct');
+        card.classList.add('correct');
+        resMsg.className = 'result-msg show-correct';
+        resMsg.innerHTML = '<i class="fas fa-check-circle"></i> Chính xác! Em làm rất chuẩn!';
+        answeredMap[qId] = true;
+    } else {
+        chosenBtn.classList.add('chosen-wrong');
+        correctBtn.classList.add('is-answer');
+        card.classList.add('wrong');
+        resMsg.className = 'result-msg show-wrong';
+        resMsg.innerHTML = '<i class="fas fa-times-circle"></i> Chưa chính xác! Đáp án đúng đã được đánh dấu xanh.';
+        answeredMap[qId] = false;
+    }
+    
+    updateScore();
+    expBox.classList.add('show');
+    safeTypeset();
+}
+
+// CHẤM ĐÚNG / SAI
+function checkTF(qId, chosenVal, correctVal) {
+    const card = document.getElementById('card_' + qId);
+    const resMsg = document.getElementById('res_' + qId);
+    const expBox = document.getElementById('exp_' + qId);
+    
+    card.querySelectorAll('.btn-tf').forEach(b => b.disabled = true);
+    const chosenBtn = document.getElementById('btn_' + qId + '_' + chosenVal);
+    
+    if (chosenVal === correctVal) {
+        chosenBtn.classList.add('chosen-correct');
+        card.classList.add('correct');
+        resMsg.className = 'result-msg show-correct';
+        resMsg.innerHTML = '<i class="fas fa-check-circle"></i> Rất giỏi! Nhận định hoàn toàn chính xác!';
+        answeredMap[qId] = true;
+    } else {
+        chosenBtn.classList.add('chosen-wrong');
+        card.classList.add('wrong');
+        resMsg.className = 'result-msg show-wrong';
+        resMsg.innerHTML = '<i class="fas fa-times-circle"></i> Nhận định chưa đúng rồi!';
+        answeredMap[qId] = false;
+    }
+    
+    updateScore();
+    expBox.classList.add('show');
+    safeTypeset();
+}
+
+// CHẤM ĐIỀN ĐÁP SỐ
+function checkShort(qId, correctVal) {
+    const input = document.getElementById('input_' + qId);
+    const userVal = input.value.trim().toLowerCase();
+    const card = document.getElementById('card_' + qId);
+    const resMsg = document.getElementById('res_' + qId);
+    const expBox = document.getElementById('exp_' + qId);
+    
+    if (!userVal) {
+        alert("Em hãy nhập kết quả vào ô trống trước nhé!");
+        return;
+    }
+    
+    const cleanUser = userVal.replace(/\s+/g, '').replace(',', '.');
+    const cleanAns = correctVal.toString().toLowerCase().replace(/\s+/g, '').replace(',', '.');
+    
+    if (cleanUser === cleanAns) {
+        card.classList.remove('wrong');
+        card.classList.add('correct');
+        resMsg.className = 'result-msg show-correct';
+        resMsg.innerHTML = '<i class="fas fa-check-circle"></i> Tuyệt vời! Kết quả hoàn toàn chính xác!';
+        answeredMap[qId] = true;
+    } else {
+        card.classList.add('wrong');
+        resMsg.className = 'result-msg show-wrong';
+        resMsg.innerHTML = '<i class="fas fa-times-circle"></i> Chưa chính xác rồi! Em hãy xem hướng dẫn bên dưới nhé.';
+        answeredMap[qId] = false;
+    }
+    
+    updateScore();
+    expBox.classList.add('show');
+    safeTypeset();
+}
+
+// ====================================================================
+// TÍNH NĂNG KẾT NỐI & NỘP BÀI VỀ GOOGLE SHEETS
+// ====================================================================
+
+const SYSTEM_DEFAULT_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbyZMrBQFoH83-P8JWnhNm145z4-wKJVlqxMdT5fFomkEE51V3adu_lObQuscoCXv-Ao/exec';
+
+function getActiveWebhookUrl() {
+    return localStorage.getItem('thcs_math_gsheet_url') || SYSTEM_DEFAULT_WEBHOOK_URL;
+}
+
+function openSheetConfigModal() {
+    const modal = document.getElementById('gsheetModal');
+    const currentUrl = getActiveWebhookUrl();
+    document.getElementById('webhookUrlInput').value = currentUrl;
+    modal.style.display = 'flex';
+}
+
+function closeSheetConfigModal() {
+    document.getElementById('gsheetModal').style.display = 'none';
+}
+
+function saveSheetUrl() {
+    const url = document.getElementById('webhookUrlInput').value.trim();
+    if (!url) {
+        localStorage.setItem('thcs_math_gsheet_url', SYSTEM_DEFAULT_WEBHOOK_URL);
+        showToast("Đã khôi phục liên kết Google Sheets mặc định của Thầy/Cô!");
+    } else {
+        localStorage.setItem('thcs_math_gsheet_url', url);
+        showToast("Đã kích hoạt liên kết Google Sheets thành công!");
+    }
+    closeSheetConfigModal();
+}
+
+function submitToGoogleSheet() {
+    const studentName = document.getElementById('studentName').value.trim();
+    const studentClass = document.getElementById('studentClass').value.trim();
+    
+    if (!studentName) {
+        alert("Em hãy nhập Họ và tên trước khi nộp bài nhé!");
+        document.getElementById('studentName').focus();
+        return;
+    }
+    
+    const webhookUrl = getActiveWebhookUrl();
+    
+    const genre = currentGenresData.find(g => g.id === activeGenreId);
+    let correctCount = 0;
+    genre.questions.forEach(q => {
+        if (answeredMap[q.id] === true) correctCount++;
+    });
+    const totalCount = genre.questions.length;
+    const score10 = totalCount > 0 ? ((correctCount / totalCount) * 10).toFixed(1) : 0;
+    
+    const payload = {
+        studentName: studentName,
+        studentClass: studentClass || "Chưa rõ",
+        grade: currentGrade,
+        genreName: genre.name,
+        correct: correctCount,
+        total: totalCount,
+        score10: score10
+    };
+    
+    const btnSubmit = document.querySelector('.btn-submit-gsheet');
+    const originalText = btnSubmit.innerHTML;
+    btnSubmit.disabled = true;
+    btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang nộp bài...';
+    
+    // Gửi bằng fetch POST mode no-cors
+    fetch(webhookUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(() => {
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = originalText;
+        alert("🎉 Chúc mừng em " + studentName + "!\n\nKết quả bài làm: " + correctCount + "/" + totalCount + " câu đúng (" + score10 + " điểm)\nĐã được gửi và lưu thành công về Bảng tính Google Sheets của Thầy/Cô!");
+        showToast("Đã lưu điểm vào Google Sheets thành công!");
+    }).catch(err => {
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = originalText;
+        alert("Có lỗi khi kết nối với Google Sheets: " + err.message);
+    });
+}
+
+function resetAll() {
+    if (confirm("Em có muốn làm lại toàn bộ phiếu từ đầu không?")) {
+        location.reload();
+    }
+}
+
+// Tự động tải thông tin đã lưu
+window.addEventListener('DOMContentLoaded', () => {
+    renderModeTopBar();
+    const initialTab = urlParams.get('tab') || 'g1';
+    switchTab(initialTab);
+    updateScore();
+    if (!localStorage.getItem('thcs_math_gsheet_url')) {
+        localStorage.setItem('thcs_math_gsheet_url', SYSTEM_DEFAULT_WEBHOOK_URL);
+    }
+    const savedName = localStorage.getItem('thcs_student_name');
+    const savedClass = localStorage.getItem('thcs_student_class');
+    if (savedName) document.getElementById('studentName').value = savedName;
+    if (savedClass) document.getElementById('studentClass').value = savedClass;
+    
+    document.getElementById('studentName').addEventListener('input', (e) => {
+        localStorage.setItem('thcs_student_name', e.target.value);
+    });
+    document.getElementById('studentClass').addEventListener('input', (e) => {
+        localStorage.setItem('thcs_student_class', e.target.value);
+    });
+});
+</script>
+
+
+</body>
+</html>
